@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: Apache-2.0
+# (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved.
+export TE_IUT1_TA_NAME=Agt_InitA
+export TE_IUT2_TA_NAME=Agt_InitB
+export TE_IUT3_TA_NAME=Agt_InitC
+export TE_IUT4_TA_NAME=Agt_InitD
+export TE_IUT5_TA_NAME=Agt_InitE
+export TE_IUT6_TA_NAME=Agt_InitF
+
+export TE_TST1_TA_NAME=Agt_TgtA
+export TE_TST2_TA_NAME=Agt_TgtB
+export TE_TST3_TA_NAME=Agt_TgtC
+export TE_TST4_TA_NAME=Agt_TgtD
+export TE_TST5_TA_NAME=Agt_TgtE
+export TE_TST6_TA_NAME=Agt_TgtF
+
+for i in $(seq 1 6) ; do
+  eval TST_BLK=\$TE_TST${i}_BLOCK
+  eval TST_BLK_N=\$TE_TST${i}_BLOCK_N
+  if [ -n "$TST_BLK" ]; then
+      for j in $( seq 0 $(($TST_BLK_N - 1)) ); do
+        eval export TE_TST${i}_BLOCK${j}=${TST_BLK}${j}
+      done
+  fi
+  if [ "x$TST_BLK" = "xnullb" ] ; then
+      eval export TE_TST${i}_NULLBLOCK=true
+  fi
+done
+
+# Export a 'safe' env PATH.
+# Presence of NFS entries in PATH can cause errors like that:
+#   Too many levels of symbolic links
+# See bug 74407 for details.
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin

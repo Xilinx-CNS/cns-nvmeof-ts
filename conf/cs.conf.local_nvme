@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<history>
+    <register>
+        <object oid="/local/nvme" access="read_create" type="none"/>
+        <object oid="/local/nvme/nqn" access="read_create" type="string"/>
+        <object oid="/local/nvme/tgt_type" access="read_create" type="string"/>
+        <object oid="/local/nvme/connect" access="read_create" type="string"/>
+    </register>
+
+    <!-- tgt type -->
+    <add cond="${TE_TST1:+true}">
+        <instance oid="/local:${TE_TST1_TA_NAME}/nvme:"/>
+
+        <!-- block 0 -->
+        <instance cond="${TE_TST1_BLOCK0:-false}"
+                  oid="/local:${TE_TST1_TA_NAME}/nvme:${TE_TST1_BLOCK0}"/>
+        <instance cond="${TE_TST1_BLOCK0:-false}"
+                  oid="/local:${TE_TST1_TA_NAME}/nvme:${TE_TST1_BLOCK0}/nqn:"
+                  value="${TE_TST1_BLOCK0_NVME_NQN}"/>
+        <!-- block 1 -->
+        <instance cond="${TE_TST1_BLOCK1:-false}"
+                  oid="/local:${TE_TST1_TA_NAME}/nvme:${TE_TST1_BLOCK1}"/>
+        <instance cond="${TE_TST1_BLOCK1:-false}"
+                  oid="/local:${TE_TST1_TA_NAME}/nvme:${TE_TST1_BLOCK1}/nqn:"
+                  value="${TE_TST1_BLOCK1_NVME_NQN}"/>
+        <!-- block 2 -->
+        <instance cond="${TE_TST1_BLOCK2:-false}"
+                  oid="/local:${TE_TST1_TA_NAME}/nvme:${TE_TST1_BLOCK2}"/>
+        <instance cond="${TE_TST1_BLOCK2:-false}"
+                  oid="/local:${TE_TST1_TA_NAME}/nvme:${TE_TST1_BLOCK2}/nqn:"
+                  value="${TE_TST1_BLOCK2_NVME_NQN}"/>
+        <!-- block 3 -->
+        <instance cond="${TE_TST1_BLOCK3:-false}"
+                  oid="/local:${TE_TST1_TA_NAME}/nvme:${TE_TST1_BLOCK3}"/>
+        <instance cond="${TE_TST1_BLOCK3:-false}"
+                  oid="/local:${TE_TST1_TA_NAME}/nvme:${TE_TST1_BLOCK3}/nqn:"
+                  value="${TE_TST1_BLOCK3_NVME_NQN}"/>
+
+        <instance oid="/local:${TE_TST1_TA_NAME}/nvme:/tgt_type:"
+                  value="${TE_TST1_TGT_TYPE:-${TE_DEFAULT_NVME_TGT_TYPE}}"/>
+    </add>
+
+    <add cond="${TE_TST2:+true}">
+        <instance oid="/local:${TE_TST2_TA_NAME}/nvme:"/>
+
+        <!-- block 0 -->
+        <instance cond="${TE_TST2_BLOCK0:-false}"
+                  oid="/local:${TE_TST2_TA_NAME}/nvme:${TE_TST2_BLOCK0}"/>
+        <instance cond="${TE_TST2_BLOCK0:-false}"
+                  oid="/local:${TE_TST2_TA_NAME}/nvme:${TE_TST2_BLOCK0}/nqn:"
+                  value="${TE_TST2_BLOCK0_NVME_NQN}"/>
+        <!-- block 1 -->
+        <instance cond="${TE_TST2_BLOCK1:-false}"
+                  oid="/local:${TE_TST2_TA_NAME}/nvme:${TE_TST2_BLOCK1}"/>
+        <instance cond="${TE_TST2_BLOCK1:-false}"
+                  oid="/local:${TE_TST2_TA_NAME}/nvme:${TE_TST2_BLOCK1}/nqn:"
+                  value="${TE_TST2_BLOCK1_NVME_NQN}"/>
+        <!-- block 2 -->
+        <instance cond="${TE_TST2_BLOCK2:-false}"
+                  oid="/local:${TE_TST2_TA_NAME}/nvme:${TE_TST2_BLOCK2}"/>
+        <instance cond="${TE_TST2_BLOCK2:-false}"
+                  oid="/local:${TE_TST2_TA_NAME}/nvme:${TE_TST2_BLOCK2}/nqn:"
+                  value="${TE_TST2_BLOCK2_NVME_NQN}"/>
+        <!-- block 3 -->
+        <instance cond="${TE_TST2_BLOCK3:-false}"
+                  oid="/local:${TE_TST2_TA_NAME}/nvme:${TE_TST2_BLOCK3}"/>
+        <instance cond="${TE_TST2_BLOCK3:-false}"
+                  oid="/local:${TE_TST2_TA_NAME}/nvme:${TE_TST2_BLOCK3}/nqn:"
+                  value="${TE_TST2_BLOCK3_NVME_NQN}"/>
+
+        <instance oid="/local:${TE_TST2_TA_NAME}/nvme:/tgt_type:"
+                  value="${TE_TST2_TGT_TYPE:-${TE_DEFAULT_NVME_TGT_TYPE}}"/>
+    </add>
+
+    <add cond="${TE_TST3:+true}">
+        <instance oid="/local:${TE_TST3_TA_NAME}/nvme:"/>
+
+        <!-- block 0 -->
+        <instance cond="${TE_TST3_BLOCK0:-false}"
+                  oid="/local:${TE_TST3_TA_NAME}/nvme:${TE_TST3_BLOCK0}"/>
+        <instance cond="${TE_TST3_BLOCK0:-false}"
+                  oid="/local:${TE_TST3_TA_NAME}/nvme:${TE_TST3_BLOCK0}/nqn:"
+                  value="${TE_TST3_BLOCK0_NVME_NQN}"/>
+        <!-- block 1 -->
+        <instance cond="${TE_TST3_BLOCK1:-false}"
+                  oid="/local:${TE_TST3_TA_NAME}/nvme:${TE_TST3_BLOCK1}"/>
+        <instance cond="${TE_TST3_BLOCK1:-false}"
+                  oid="/local:${TE_TST3_TA_NAME}/nvme:${TE_TST3_BLOCK1}/nqn:"
+                  value="${TE_TST3_BLOCK1_NVME_NQN}"/>
+        <!-- block 2 -->
+        <instance cond="${TE_TST3_BLOCK2:-false}"
+                  oid="/local:${TE_TST3_TA_NAME}/nvme:${TE_TST3_BLOCK2}"/>
+        <instance cond="${TE_TST3_BLOCK2:-false}"
+                  oid="/local:${TE_TST3_TA_NAME}/nvme:${TE_TST3_BLOCK2}/nqn:"
+                  value="${TE_TST3_BLOCK2_NVME_NQN}"/>
+        <!-- block 3 -->
+        <instance cond="${TE_TST3_BLOCK3:-false}"
+                  oid="/local:${TE_TST3_TA_NAME}/nvme:${TE_TST3_BLOCK3}"/>
+        <instance cond="${TE_TST3_BLOCK3:-false}"
+                  oid="/local:${TE_TST3_TA_NAME}/nvme:${TE_TST3_BLOCK3}/nqn:"
+                  value="${TE_TST3_BLOCK3_NVME_NQN}"/>
+
+        <instance oid="/local:${TE_TST3_TA_NAME}/nvme:/tgt_type:"
+                  value="${TE_TST3_TGT_TYPE:-${TE_DEFAULT_NVME_TGT_TYPE}}"/>
+    </add>
+
+    <add cond="${TE_TST4:+true}">
+        <instance oid="/local:${TE_TST4_TA_NAME}/nvme:"/>
+
+        <!-- block 0 -->
+        <instance cond="${TE_TST4_BLOCK0:-false}"
+                  oid="/local:${TE_TST4_TA_NAME}/nvme:${TE_TST4_BLOCK0}"/>
+        <instance cond="${TE_TST4_BLOCK0:-false}"
+                  oid="/local:${TE_TST4_TA_NAME}/nvme:${TE_TST4_BLOCK0}/nqn:"
+                  value="${TE_TST4_BLOCK0_NVME_NQN}"/>
+        <!-- block 1 -->
+        <instance cond="${TE_TST4_BLOCK1:-false}"
+                  oid="/local:${TE_TST4_TA_NAME}/nvme:${TE_TST4_BLOCK1}"/>
+        <instance cond="${TE_TST4_BLOCK1:-false}"
+                  oid="/local:${TE_TST4_TA_NAME}/nvme:${TE_TST4_BLOCK1}/nqn:"
+                  value="${TE_TST4_BLOCK1_NVME_NQN}"/>
+        <!-- block 2 -->
+        <instance cond="${TE_TST4_BLOCK2:-false}"
+                  oid="/local:${TE_TST4_TA_NAME}/nvme:${TE_TST4_BLOCK2}"/>
+        <instance cond="${TE_TST4_BLOCK2:-false}"
+                  oid="/local:${TE_TST4_TA_NAME}/nvme:${TE_TST4_BLOCK2}/nqn:"
+                  value="${TE_TST4_BLOCK2_NVME_NQN}"/>
+        <!-- block 3 -->
+        <instance cond="${TE_TST4_BLOCK3:-false}"
+                  oid="/local:${TE_TST4_TA_NAME}/nvme:${TE_TST4_BLOCK3}"/>
+        <instance cond="${TE_TST4_BLOCK3:-false}"
+                  oid="/local:${TE_TST4_TA_NAME}/nvme:${TE_TST4_BLOCK3}/nqn:"
+                  value="${TE_TST4_BLOCK3_NVME_NQN}"/>
+
+        <instance oid="/local:${TE_TST4_TA_NAME}/nvme:/tgt_type:"
+                  value="${TE_TST4_TGT_TYPE:-${TE_DEFAULT_NVME_TGT_TYPE}}"/>
+    </add>
+
+    <add cond="${TE_TST5:+true}">
+        <instance oid="/local:${TE_TST5_TA_NAME}/nvme:"/>
+
+        <!-- block 0 -->
+        <instance cond="${TE_TST5_BLOCK0:-false}"
+                  oid="/local:${TE_TST5_TA_NAME}/nvme:${TE_TST5_BLOCK0}"/>
+        <instance cond="${TE_TST5_BLOCK0:-false}"
+                  oid="/local:${TE_TST5_TA_NAME}/nvme:${TE_TST5_BLOCK0}/nqn:"
+                  value="${TE_TST5_BLOCK0_NVME_NQN}"/>
+        <!-- block 1 -->
+        <instance cond="${TE_TST5_BLOCK1:-false}"
+                  oid="/local:${TE_TST5_TA_NAME}/nvme:${TE_TST5_BLOCK1}"/>
+        <instance cond="${TE_TST5_BLOCK1:-false}"
+                  oid="/local:${TE_TST5_TA_NAME}/nvme:${TE_TST5_BLOCK1}/nqn:"
+                  value="${TE_TST5_BLOCK1_NVME_NQN}"/>
+        <!-- block 2 -->
+        <instance cond="${TE_TST5_BLOCK2:-false}"
+                  oid="/local:${TE_TST5_TA_NAME}/nvme:${TE_TST5_BLOCK2}"/>
+        <instance cond="${TE_TST5_BLOCK2:-false}"
+                  oid="/local:${TE_TST5_TA_NAME}/nvme:${TE_TST5_BLOCK2}/nqn:"
+                  value="${TE_TST5_BLOCK2_NVME_NQN}"/>
+        <!-- block 3 -->
+        <instance cond="${TE_TST5_BLOCK3:-false}"
+                  oid="/local:${TE_TST5_TA_NAME}/nvme:${TE_TST5_BLOCK3}"/>
+        <instance cond="${TE_TST5_BLOCK3:-false}"
+                  oid="/local:${TE_TST5_TA_NAME}/nvme:${TE_TST5_BLOCK3}/nqn:"
+                  value="${TE_TST5_BLOCK3_NVME_NQN}"/>
+
+
+        <instance oid="/local:${TE_TST5_TA_NAME}/nvme:/tgt_type:"
+                  value="${TE_TST5_TGT_TYPE:-${TE_DEFAULT_NVME_TGT_TYPE}}"/>
+    </add>
+
+     <add cond="${TE_TST6:+true}">
+        <instance oid="/local:${TE_TST6_TA_NAME}/nvme:"/>
+
+        <!-- block 0 -->
+        <instance cond="${TE_TST6_BLOCK0:-false}"
+                  oid="/local:${TE_TST6_TA_NAME}/nvme:${TE_TST6_BLOCK0}"/>
+        <instance cond="${TE_TST6_BLOCK0:-false}"
+                  oid="/local:${TE_TST6_TA_NAME}/nvme:${TE_TST6_BLOCK0}/nqn:"
+                  value="${TE_TST6_BLOCK0_NVME_NQN}"/>
+        <!-- block 1 -->
+        <instance cond="${TE_TST6_BLOCK1:-false}"
+                  oid="/local:${TE_TST6_TA_NAME}/nvme:${TE_TST6_BLOCK1}"/>
+        <instance cond="${TE_TST6_BLOCK1:-false}"
+                  oid="/local:${TE_TST6_TA_NAME}/nvme:${TE_TST6_BLOCK1}/nqn:"
+                  value="${TE_TST6_BLOCK1_NVME_NQN}"/>
+        <!-- block 2 -->
+        <instance cond="${TE_TST6_BLOCK2:-false}"
+                  oid="/local:${TE_TST6_TA_NAME}/nvme:${TE_TST6_BLOCK2}"/>
+        <instance cond="${TE_TST6_BLOCK2:-false}"
+                  oid="/local:${TE_TST6_TA_NAME}/nvme:${TE_TST6_BLOCK2}/nqn:"
+                  value="${TE_TST6_BLOCK2_NVME_NQN}"/>
+        <!-- block 3 -->
+        <instance cond="${TE_TST6_BLOCK3:-false}"
+                  oid="/local:${TE_TST6_TA_NAME}/nvme:${TE_TST6_BLOCK3}"/>
+        <instance cond="${TE_TST6_BLOCK3:-false}"
+                  oid="/local:${TE_TST6_TA_NAME}/nvme:${TE_TST6_BLOCK3}/nqn:"
+                  value="${TE_TST6_BLOCK3_NVME_NQN}"/>
+
+        <instance oid="/local:{TE_TST6_TA_NAME}/nvme:/tgt_type:"
+                  value="${TE_TST6_TGT_TYPE:-${TE_DEFAULT_NVME_TGT_TYPE}}"/>
+    </add>
+
+    <!-- nvme connect -->
+    <add cond="${TE_IUT1:+true}">
+        <instance oid="/local:${TE_IUT1_TA_NAME}/nvme:"/>
+        <instance oid="/local:${TE_IUT1_TA_NAME}/nvme:/connect:hdr_digest"
+                  value="${TE_IUT1_NVME_CONN_HDR_DIGEST:-${TE_DEFAULT_NVME_CONN_HDR_DIGEST}}"/>
+        <instance oid="/local:${TE_IUT1_TA_NAME}/nvme:/connect:data_digest"
+                  value="${TE_IUT1_NVME_CONN_DATA_DIGEST:-${TE_DEFAULT_NVME_CONN_DATA_DIGEST}}"/>
+    </add>
+
+    <add cond="${TE_IUT2:+true}">
+        <instance oid="/local:${TE_IUT2_TA_NAME}/nvme:"/>
+        <instance oid="/local:${TE_IUT2_TA_NAME}/nvme:/connect:hdr_digest"
+                  value="${TE_IUT2_NVME_CONN_HDR_DIGEST:-${TE_DEFAULT_NVME_CONN_HDR_DIGEST}}"/>
+        <instance oid="/local:${TE_IUT2_TA_NAME}/nvme:/connect:data_digest"
+                  value="${TE_IUT2_NVME_CONN_DATA_DIGEST:-${TE_DEFAULT_NVME_CONN_DATA_DIGEST}}"/>
+    </add>
+
+    <add cond="${TE_IUT3:+true}">
+        <instance oid="/local:${TE_IUT3_TA_NAME}/nvme:"/>
+        <instance oid="/local:${TE_IUT3_TA_NAME}/nvme:/connect:hdr_digest"
+                  value="${TE_IUT3_NVME_CONN_HDR_DIGEST:-${TE_DEFAULT_NVME_CONN_HDR_DIGEST}}"/>
+        <instance oid="/local:${TE_IUT3_TA_NAME}/nvme:/connect:data_digest"
+                  value="${TE_IUT3_NVME_CONN_DATA_DIGEST:-${TE_DEFAULT_NVME_CONN_DATA_DIGEST}}"/>
+    </add>
+
+    <add cond="${TE_IUT4:+true}">
+        <instance oid="/local:${TE_IUT4_TA_NAME}/nvme:"/>
+        <instance oid="/local:${TE_IUT4_TA_NAME}/nvme:/connect:hdr_digest"
+                  value="${TE_IUT4_NVME_CONN_HDR_DIGEST:-${TE_DEFAULT_NVME_CONN_HDR_DIGEST}}"/>
+        <instance oid="/local:${TE_IUT4_TA_NAME}/nvme:/connect:data_digest"
+                  value="${TE_IUT4_NVME_CONN_DATA_DIGEST:-${TE_DEFAULT_NVME_CONN_DATA_DIGEST}}"/>
+    </add>
+
+    <add cond="${TE_IUT5:+true}">
+        <instance oid="/local:${TE_IUT5_TA_NAME}/nvme:"/>
+        <instance oid="/local:${TE_IUT5_TA_NAME}/nvme:/connect:hdr_digest"
+                  value="${TE_IUT5_NVME_CONN_HDR_DIGEST:-${TE_DEFAULT_NVME_CONN_HDR_DIGEST}}"/>
+        <instance oid="/local:${TE_IUT5_TA_NAME}/nvme:/connect:data_digest"
+                  value="${TE_IUT5_NVME_CONN_DATA_DIGEST:-${TE_DEFAULT_NVME_CONN_DATA_DIGEST}}"/>
+    </add>
+
+    <add cond="${TE_IUT6:+true}">
+        <instance oid="/local:${TE_IUT6_TA_NAME}/nvme:"/>
+        <instance oid="/local:${TE_IUT6_TA_NAME}/nvme:/connect:hdr_digest"
+                  value="${TE_IUT6_NVME_CONN_HDR_DIGEST:-${TE_DEFAULT_NVME_CONN_HDR_DIGEST}}"/>
+        <instance oid="/local:${TE_IUT6_TA_NAME}/nvme:/connect:data_digest"
+                  value="${TE_IUT6_NVME_CONN_DATA_DIGEST:-${TE_DEFAULT_NVME_CONN_DATA_DIGEST}}"/>
+    </add>
+
+</history>

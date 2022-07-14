@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<package version="1.0">
+
+    <description>Data corruption</description>
+
+    <author mailto="Nikita.Somenkov@oktetlabs.ru"/>
+
+    <session track_conf="silent">
+        <arg name="env">
+            <value ref="env.init-to-tgt"/>
+        </arg>
+
+        <!--FIO default options-->
+        <arg name="blocksize">
+            <value reqs="BLOCK_512,SMALL_BLOCK">512</value>
+            <value>4096</value>
+            <value>32768</value>
+        </arg>
+        <arg name="ioengine">
+            <value>libaio</value>
+        </arg>
+        <arg name="numjobs">
+            <value>1</value>
+            <value>64</value>
+        </arg>
+        <arg name="rwtype">
+            <value>rand</value>
+        </arg>
+        <arg name="rwmixread">
+            <value>50</value>
+        </arg>
+        <arg name="iodepth">
+            <value>1</value>
+            <value>32</value>
+            <value>64</value>
+        </arg>
+        <arg name="runtime_sec">
+            <value>10</value>
+        </arg>
+
+        <!--interface options-->
+        <arg name="mtu">
+            <value>9000</value>
+        </arg>
+        <arg name="tso">
+            <value>on</value>
+        </arg>
+        <arg name="lro">
+            <value>off</value>
+        </arg>
+
+        <run name="fio_pattern">
+            <script name="fio_pattern"/>
+        </run>
+
+    </session>
+</package>
+

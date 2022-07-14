@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: Apache-2.0
+# (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved.
+TE_PLATFORM([], [], [-D_GNU_SOURCE], [], [],
+            [logger_core tools rpc_types conf_oid rpcxdr asn ndn \
+             comm_net_agent loggerta rpctransport agentlib rpcserver \
+             rcfpch tad logic_expr logger_core \
+             ipc bsapi loggerten rcfapi confapi comm_net_engine rcfunix \
+             trc tapi rcfrpc tapi_rpc tapi_env tapi_tad netconf \
+             rpcs_job tapi_job tapi_fio tapi_nvme tapi_performance])
+
+TE_EXT_LIBS([linux], [x86_64-pc-linux], [pam pcap tlc expect libnl3])
+TE_EXT_LIBS([], [x86_64-pc-linux], [pam pcap tlc expect libnl3])
+
+TE_TOOLS([rgt trc])
+TE_TOOL_PARMS([trc], [--with-popups --with-log-urls])
+
+TE_APP_PARMS([rcf], [--enable-ltdl-install])
+TE_APP_PARMS([tester], [ --with-trc])
+TE_LIB_PARMS([rpcxdr], [], [],
+             [--with-rpcdefs=tarpc_job.x.m4])
+
+TE_LIB_PARMS([tapi_tad], [], [],
+             [--without-snmp --without-atm --without-bridge --without-iscsi])
+
+TE_LIB_PARMS([tad], [], [],
+             [--with-arp --with-dhcp --with-socket --with-ipstack --with-eth \
+             --with-igmp --with-ppp --with-forw --without-static-libc])
+
+TE_LIB_PARMS([rcfpch], [], [], [--with-sniffers])
+
+TE_TA_TYPE([linux], [], [unix],
+           [--with-rcf-rpc --with-aggr --with-serialparse \
+           --with-libnetconf --with-iptables --with-tc \
+           --with-sniffers=yes --without-static-libc --with-pcre],
+           [], [], [], [comm_net_agent rpcs_job tad ndn asn])

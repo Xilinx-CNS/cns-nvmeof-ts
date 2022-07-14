@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+# (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved.
+IUT_COUNT=6     # Initiator count
+TST_COUNT=6     # Target count
+
+for i in $(seq 1 ${IUT_COUNT}) ; do
+    VARNAME=TE_IUT${i}
+    [ "${!VARNAME}" ] && TRC_TAGS="$TRC_TAGS init_${!VARNAME}"
+done
+
+for i in $(seq 1 ${TST_COUNT}) ; do
+    VARNAME=TE_TST${i}
+    [ "${!VARNAME}" ] && TRC_TAGS="$TRC_TAGS tgt_${!VARNAME}"
+done

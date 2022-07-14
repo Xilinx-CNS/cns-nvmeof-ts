@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<package version="1.0">
+
+    <description>Configuration testing</description>
+
+    <author mailto="Nikita.Somenkov@oktetlabs.ru"/>
+
+    <session track_conf="silent">
+        <arg name="env">
+            <value ref="env.init-to-tgt"/>
+        </arg>
+        <arg name="blocksize" type="fio.blocksize.512-32k">
+            <value reqs="BLOCK_512,SMALL_BLOCK">512</value>
+        </arg>
+        <arg name="ioengine" type="fio.ioengine">
+            <value>libaio</value>
+        </arg>
+        <arg name="numjobs" type="fio.numjobs.1-1024">
+            <value>8</value>
+        </arg>
+        <arg name="rwtype" type="fio.rwtype">
+            <value>rand</value>
+        </arg>
+        <arg name="iodepth" type="fio.iodepth.1-64">
+            <value>32</value>
+        </arg>
+        <arg name="rwmixread" type="fio.rwmixread.0-100">
+            <value>50</value>
+        </arg>
+        <arg name="runtime_sec">
+            <value>60</value>
+        </arg>
+
+        <!--interface default options-->
+        <arg name="mtu" value="9000"/>
+        <arg name="tso" value="on"/>
+        <arg name="lro" value="off"/>
+
+        <arg name="repeat">
+            <value>1000</value>
+            <value>25</value>
+        </arg>
+
+        <arg name="ttype">
+            <value>traversal_consistently</value>
+            <value>traversal_rand</value>
+        </arg>
+
+        <run>
+            <script name="list"/>
+            <arg name="env">
+                <value ref="env.init-to-tgt"/>
+            </arg>
+        </run>
+         <run>
+            <script name="nvmecmd"/>
+        </run>
+        <run name="onecmd">
+            <script name="nvmecmd"/>
+            <arg name="ttype" value="traversal_consistently"/>
+            <arg name="specific_commands">
+                <value>list</value>
+                <value>id-ctrl</value>
+                <value>id-ns</value>
+                <value>show-regs</value>
+                <value>fw-log</value>
+                <value>smart-log</value>
+                <value>error-log</value>
+                <value>get-feature</value>
+                <value>flush</value>
+            </arg>
+        </run>
+
+         <run>
+            <script name="connect"/>
+            <arg name="use_tgt_addr">
+                <value>default</value>
+                <value reqs="BROKEN">wildcard</value>
+            </arg>
+            <arg name="repeat">
+                <value>1</value>
+                <value>10</value>
+                <value>100</value>
+            </arg>
+            <arg name="connect_type">
+                <value>nvme-connect</value>
+                <value>nvme-connect-all</value>
+            </arg>
+        </run>
+
+    </session>
+</package>
+

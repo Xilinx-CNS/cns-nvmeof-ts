@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<history cond="${TE_CS_BOND:+true}">
+
+    <!--bond/team on initiator (IUT) -->
+    <add cond="${TE_IUT1_TST1_S1:+true}">
+        <instance oid="/agent:${TE_IUT1_TA_NAME}/rsrc:${TE_IUT1_TST1_S1}"
+                  value="/agent:${TE_IUT1_TA_NAME}/interface:${TE_IUT1_TST1_S1}"/>
+    </add>
+    <set cond="${TE_IUT1_TST1_S1:+true}">
+        <instance oid="/agent:${TE_IUT1_TA_NAME}/interface:${TE_IUT1_TST1_S1}/status:" value="0"/>
+    </set>
+    <add cond="${TE_IUT1_TST1_S1:+true}">
+        <instance oid="/agent:${TE_IUT1_TA_NAME}/aggregation:${TE_CS_BOND}/member:${TE_IUT1_TST1_S1}"/>
+        <instance oid="/local:/host:${TE_IUT1}/agent:${TE_IUT1_TA_NAME}/interface:${TE_CS_BOND_IF}/parent:0"
+                  value="/local:/host:${TE_IUT1}/agent:${TE_IUT1_TA_NAME}/interface:${TE_IUT1_TST1_S1}"/>
+    </add>
+    <set cond="${TE_IUT1_TST1_S1:+true}">
+        <instance oid="/agent:${TE_IUT1_TA_NAME}/interface:${TE_IUT1_TST1_S1}/status:" value="1"/>
+    </set>
+
+    <!--bond/team on target (TST) -->
+    <add cond="${TE_TST1_IUT1_S1:+true}">
+        <instance oid="/agent:${TE_TST1_TA_NAME}/rsrc:${TE_TST1_IUT1_S1}"
+                  value="/agent:${TE_TST1_TA_NAME}/interface:${TE_TST1_IUT1_S1}"/>
+    </add>
+    <set cond="${TE_TST1_IUT1_S1:+true}">
+        <instance oid="/agent:${TE_TST1_TA_NAME}/interface:${TE_TST1_IUT1_S1}/status:" value="0"/>
+    </set>
+    <add cond="${TE_TST1_IUT1_S1:+true}">
+        <instance oid="/agent:${TE_TST1_TA_NAME}/aggregation:${TE_CS_BOND}/member:${TE_TST1_IUT1_S1}"/>
+        <instance oid="/local:/host:${TE_TST1}/agent:${TE_TST1_TA_NAME}/interface:${TE_CS_BOND_IF}/parent:0"
+                  value="/local:/host:${TE_TST1}/agent:${TE_TST1_TA_NAME}/interface:${TE_TST1_IUT1_S1}"/>
+    </add>
+    <set cond="${TE_TST1_IUT1_S1:+true}">
+        <instance oid="/agent:${TE_TST1_TA_NAME}/interface:${TE_TST1_IUT1_S1}/status:" value="1"/>
+    </set>
+
+</history>

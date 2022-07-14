@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<test name="stability" type="package">
+    <objective>All performance test</objective>
+    <iter result="PASSED">
+        <test name="fio_stability" type="script">
+            <objective>Run FIO over a bad link that looses/corrupts the frames</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc"/>
+                <arg name="if_corruption_prob"/>
+            </iter>
+        </test>
+        <test name="fio_stability_if_delay_loop" type="script">
+            <objective>Run FIO over a bad link that looses/corrupts the frames</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc"/>
+                <arg name="if_corruption_prob"/>
+            </iter>
+        </test>
+        <test name="fio_stability_if_loss_loop" type="script">
+            <objective>Run FIO over a bad link that looses/corrupts the frames</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc">0</arg>
+                <arg name="if_corruption_prob"/>
+            </iter>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc">1</arg>
+                <arg name="if_corruption_prob"/>
+            </iter>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc">2</arg>
+                <arg name="if_corruption_prob"/>
+            </iter>
+            <iter result="FAILED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc">5</arg>
+                <arg name="if_corruption_prob"/>
+            </iter>
+             <iter result="FAILED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc">10</arg>
+                <arg name="if_corruption_prob"/>
+            </iter>
+        </test>
+        <test name="fio_stability_if_corruption_loop" type="script">
+            <objective>Run FIO over a bad link that looses/corrupts the frames</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc"/>
+                <arg name="if_corruption_prob">0</arg>
+            </iter>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc"/>
+                <arg name="if_corruption_prob">1</arg>
+            </iter>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc"/>
+                <arg name="if_corruption_prob">2</arg>
+            </iter>
+            <iter result="FAILED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc"/>
+                <arg name="if_corruption_prob">5</arg>
+            </iter>
+             <iter result="FAILED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="if_delay_msec"/>
+                <arg name="if_loss_proc"/>
+                <arg name="if_corruption_prob">10</arg>
+            </iter>
+        </test>
+        <test name="fio_parallel_traffic" type="script">
+            <objective>Run FIO over a bad link that looses/corrupts the frames</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="streams"/>
+                <arg name="duration_sec"/>
+            </iter>
+        </test>
+         <test name="fio_updown" type="script">
+            <objective>Run traffic while doing link up/down</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="repeat"/>
+            </iter>
+        </test>
+        <test name="onvme_kill" type="script">
+            <objective>Kill ONVMe target while fio work</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+            </iter>
+        </test>
+        <test name="fio_dupconn" type="script">
+            <objective>FIO tests with nvme connect --duplicate_connect</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+            </iter>
+        </test>
+         <test name="fio_disconnparallel" type="script">
+            <objective>Kill ONVMe target while fio work</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="period"/>
+            </iter>
+        </test>
+        <test name="fio_reconnect" type="script">
+            <objective>Toggle link for check that reconnect works</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+            </iter>
+        </test>
+    </iter>
+</test>

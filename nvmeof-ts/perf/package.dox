@@ -1,0 +1,22 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/* (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. */
+/**
+
+@defgroup perf Block level FIO runs
+@ingroup spec
+@{
+
+This package describes simple block level test with no bad interference on any
+levels. They're suppose to run FIO in accordance with the configuration and (if
+needed) publish performance numbers.
+
+@author Nikita Somenkov <Nikita.Somenkov@oktetlabs.ru>
+
+@par Tests:
+
+-# @ref perf-fio_simple
+-# @ref perf-fio_multi
+
+@} usecases
+*/
+

@@ -1,0 +1,87 @@
+# SPDX-License-Identifier: Apache-2.0
+# (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved.
+TE_PLATFORM([], [], [-D_GNU_SOURCE], [], [],
+            [logger_core tools rpc_types conf_oid rpcxdr asn ndn \
+             comm_net_agent loggerta rpctransport agentlib rpcserver \
+             rcfpch tad logic_expr \
+             ipc bsapi loggerten rcfapi confapi comm_net_engine rcfunix \
+             trc tapi rcfrpc tapi_rpc tapi_env tapi_tad netconf tapi_performance tapi_fio \
+             tapi_nvme])
+
+TE_TOOLS([rgt trc])
+
+TE_APP_PARMS([rcf], [--enable-ltdl-install])
+TE_APP_PARMS([tester], [ --with-trc])
+
+TE_LIB_PARMS([tapi_tad], [], [],
+             [--without-snmp --without-atm --without-bridge --without-iscsi])
+
+TE_LIB_PARMS([tad], [], [],
+             [--with-arp --with-dhcp --with-socket --with-ipstack --with-eth \
+             --with-igmp --with-ppp --with-forw --without-static-libc])
+
+TE_LIB_PARMS([rcfpch], [], [], [--with-sniffers])
+
+. $TE_BASE/engine/builder/te_functions
+define([TE_AGENT_BUILD], [
+    if test -n "${$1}" ; then
+        if ! te_is_in_list "${$1_TA_TYPE}" $TE_BS_PLATFORMS ; then
+            case "${$1_TA_TYPE}" in
+                *64*) TE_TA_HOST=x86_64-pc-linux ;;
+                *)    TE_TA_HOST=i386-pc-linux   ;;
+            esac
+
+            TE_AGENT_BUILD_PARMS=
+            TE_AGENT_BUILD_CC=${$1_CC}
+            TE_AGENT_BUILD_CFLAGS=${$1_CFLAGS}
+            test -n "$TE_AGENT_BUILD_CC" && TE_AGENT_BUILD_CC="CC=$TE_AGENT_BUILD_CC"
+
+            TE_PLATFORM([${$1_TA_TYPE}], [$TE_AGENT_BUILD_CC],
+                        [$TE_AGENT_BUILD_CFLAGS -D_GNU_SOURCE],
+                        [-march=native],
+                        [],
+                        [logger_core tools conf_oid rpcxdr rpc_types asn ndn \
+                         comm_net_agent loggerta rpctransport agentlib \
+                         rpcserver rcfpch tad netconf])
+
+            TE_EXT_LIBS([${$1_TA_TYPE}], [${TE_TA_HOST}], [pam pcap tcl expect])
+
+            TE_LIB_PARMS([tad], [${$1_TA_TYPE}], [],
+                         [--with-pcap --with-eth --with-arp --with-ppp --with-ipstack \
+                          --with-packet-mmap-rx-ring --with-vxlan --with-geneve --with-gre \
+                          --without-static-libc])
+
+            TE_LIB_PARMS([rcfpch], [${$1_TA_TYPE}], [], [--with-sniffers],
+                         [], [], [])
+
+
+            TE_TA_TYPE([${$1_TA_TYPE}], [${$1_TA_TYPE}], [unix],
+                       [--enable-pci \
+                        --with-rcf-rpc \
+                        --with-libnetconf \
+                        --with-serialparse \
+                        --with-sniffers=yes \
+                        --with-aggr \
+                        --without-static-libc \
+                        --with-iptables],
+                       [], [], [], [comm_net_agent ndn asn],
+                       [])
+
+           TE_TCE([${$1_TA_TYPE}], [agent], [], [unix], [])
+        fi
+    fi
+])
+
+TE_AGENT_BUILD([TE_IUT1])
+TE_AGENT_BUILD([TE_IUT2])
+TE_AGENT_BUILD([TE_IUT3])
+TE_AGENT_BUILD([TE_IUT4])
+TE_AGENT_BUILD([TE_IUT5])
+TE_AGENT_BUILD([TE_IUT6])
+
+TE_AGENT_BUILD([TE_TST1])
+TE_AGENT_BUILD([TE_TST2])
+TE_AGENT_BUILD([TE_TST3])
+TE_AGENT_BUILD([TE_TST4])
+TE_AGENT_BUILD([TE_TST5])
+TE_AGENT_BUILD([TE_TST6])

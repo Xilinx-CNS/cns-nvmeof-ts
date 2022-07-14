@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<trc_db>
+    <test name="nvmeof-ts" type="package">
+        <objective>NVMEoF Test Suite</objective>
+
+        <iter result="PASSED">
+            <test name="prologue" type="script">
+                <objective>Up all used network interfaces. Assign IPv4 addresses for all used networks. Copy libraries to be tested on test hosts.</objective>
+                <iter result="PASSED"/>
+            </test>
+
+            <xi:include href="trc/trc-nvmeof-ts-conf.xml" parse="xml"
+                        xmlns:xi="http://www.w3.org/2003/XInclude"/>
+            <xi:include href="trc/trc-nvmeof-ts-data.xml" parse="xml"
+                        xmlns:xi="http://www.w3.org/2003/XInclude"/>
+            <xi:include href="trc/trc-nvmeof-ts-perf.xml" parse="xml"
+                        xmlns:xi="http://www.w3.org/2003/XInclude"/>
+            <xi:include href="trc/trc-nvmeof-ts-stability.xml" parse="xml"
+                        xmlns:xi="http://www.w3.org/2003/XInclude"/>
+        </iter>
+    </test>
+</trc_db>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<history cond="${TE_CS_BOND:+true}">
+
+    <register>
+        <object oid="/agent/aggregation" access="read_create" type="string"/>
+        <object oid="/agent/aggregation/interface" access="read_create" type="string"/>
+        <object oid="/agent/aggregation/member" access="read_create" type="string"/>
+
+        <object oid="/local/host" access="read_create" type="none"/>
+        <object oid="/local/host/agent" access="read_create" type="none"/>
+        <object oid="/local/host/agent/interface" access="read_create" type="none"/>
+        <object oid="/local/host/agent/interface/parent" access="read_create" type="string"/>
+    </register>
+
+    <!--initiator-->
+    <add cond="${TE_IUT1:+true}">
+        <instance oid="/local:/host:${TE_IUT1}"/>
+        <instance oid="/local:/host:${TE_IUT1}/agent:${TE_IUT1_TA_NAME}"/>
+        <instance oid="/local:/host:${TE_IUT1}/agent:${TE_IUT1_TA_NAME}/interface:${TE_CS_BOND_IF}"/>
+
+        <instance oid="/agent:${TE_IUT1_TA_NAME}/aggregation:${TE_CS_BOND}"
+                  value="${TE_CS_BOND}"/>
+        <instance oid="/agent:${TE_IUT1_TA_NAME}/rsrc:${TE_CS_BOND_IF}"
+                  value="/agent:${TE_IUT1_TA_NAME}/interface:${TE_CS_BOND_IF}"/>
+    </add>
+
+    <!--target-->
+    <add cond="${TE_TST1:+true}">
+        <instance oid="/local:/host:${TE_TST1}"/>
+        <instance oid="/local:/host:${TE_TST1}/agent:${TE_TST1_TA_NAME}"/>
+        <instance oid="/local:/host:${TE_TST1}/agent:${TE_TST1_TA_NAME}/interface:${TE_CS_BOND_IF}"/>
+
+        <instance oid="/agent:${TE_TST1_TA_NAME}/aggregation:${TE_CS_BOND}"
+                  value="${TE_CS_BOND}"/>
+        <instance oid="/agent:${TE_TST1_TA_NAME}/rsrc:${TE_CS_BOND_IF}"
+                  value="/agent:${TE_TST1_TA_NAME}/interface:${TE_CS_BOND_IF}"/>
+    </add>
+
+    <xi:include href="aggregation/cs.conf.inc.slave1" parse="xml"
+                xmlns:xi="http://www.w3.org/2003/XInclude"/>
+
+    <xi:include href="aggregation/cs.conf.inc.slave2" parse="xml"
+                xmlns:xi="http://www.w3.org/2003/XInclude"/>
+
+    <xi:include href="aggregation/cs.conf.inc.slave3" parse="xml"
+                xmlns:xi="http://www.w3.org/2003/XInclude"/>
+
+    <xi:include href="aggregation/cs.conf.inc.slave4" parse="xml"
+                xmlns:xi="http://www.w3.org/2003/XInclude"/>
+
+
+</history>

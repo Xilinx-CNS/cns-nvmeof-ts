@@ -1,0 +1,180 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<package version="1.0">
+
+    <description>Stability testing</description>
+
+    <author mailto="Nikita.Somenkov@oktetlabs.ru"/>
+
+    <session track_conf="nohistory">
+        <arg name="env">
+            <value ref="env.init-to-tgt"/>
+        </arg>
+
+        <!--FIO default options-->
+        <arg name="blocksize" type="fio.blocksize.512-32k"/>
+        <arg name="ioengine" value="libaio"/>
+        <arg name="runtime_sec" value="10"/>
+        <arg name="rwtype" value="rand"/>
+        <arg name="rwmixread" value="50"/>
+        <arg name="numjobs">
+            <value>1</value>
+            <value>64</value>
+        </arg>
+        <arg name="iodepth">
+            <value>1</value>
+            <value>32</value>
+            <value>64</value>
+        </arg>
+
+        <!--interface options-->
+        <arg name="mtu" value="9000"/>
+        <arg name="tso" value="on"/>
+        <arg name="lro" value="off"/>
+
+        <!--All fio stability matrix-->
+        <run name="fio_stability">
+             <script name="fio_stability">
+                <req id="BROKEN"/>
+            </script>
+            <arg name="if_delay_msec">
+                <value>0</value>
+                <value>10</value>
+                <value>100</value>
+            </arg>
+            <arg name="if_loss_proc">
+                <value>0</value>
+                <value>25</value>
+                <value>50</value>
+                <value>75</value>
+                <value>100</value>
+            </arg>
+            <arg name="if_corruption_prob">
+                <value>0</value>
+                <value>5</value>
+                <value>10</value>
+            </arg>
+        </run>
+
+        <run name="fio_stability_if_delay_loop">
+            <script name="fio_stability">
+                <req id="FIO_STABILITY_IF_DELAY_LOOP"/>
+            </script>
+            <arg name="if_loss_proc" value="0"/>
+            <arg name="if_corruption_prob" value="0"/>
+            <arg name="if_delay_msec">
+                <value>10</value>
+                <value>50</value>
+            </arg>
+        </run>
+
+        <run name="fio_stability_if_loss_loop">
+            <script name="fio_stability">
+                <req id="FIO_STABILITY_IF_LOSS_LOOP"/>
+            </script>
+            <arg name="if_delay_msec" value="0"/>
+            <arg name="if_corruption_prob" value="0"/>
+            <arg name="if_loss_proc">
+                <value>1</value>
+                <value>2</value>
+                <value>5</value>
+                <value>10</value>
+            </arg>
+        </run>
+
+        <run name="fio_stability_if_corruption_loop">
+            <script name="fio_stability">
+                <req id="FIO_STABILITY_IF_CORRUPTION_LOOP"/>
+            </script>
+            <arg name="if_delay_msec" value="0"/>
+            <arg name="if_loss_proc" value="0"/>
+            <arg name="if_corruption_prob">
+                <value>1</value>
+                <value>2</value>
+                <value>5</value>
+                <value>10</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="fio_parallel_traffic"/>
+            <arg name="streams">
+                <value>1</value>
+                <value>10</value>
+            </arg>
+            <arg name="duration_sec" value="50"/>
+        </run>
+
+         <run>
+            <script name="fio_updown">
+                <req id="BROKEN"/>
+            </script>
+            <arg name="repeat">
+                <value>1</value>
+                <value>5</value>
+                <value>10</value>
+            </arg>
+            <arg name="runtime_sec" value="180"/>
+        </run>
+
+        <run>
+            <script name="fio_disconnparallel"/>
+            <arg name="period">
+                <value>1</value>
+                <value>10</value>
+            </arg>
+        </run>
+
+        <run>
+            <script name="onvme_kill">
+                <req id="ONVME_TARGET"/>
+            </script>
+            <arg name="sig">
+                <value>SIGINT</value>
+                <value>SIGTERM</value>
+            </arg>
+            <arg name="wating_reconnect" value="20"/>
+        </run>
+
+        <run>
+            <script name="fio_dupconn"/>
+        </run>
+
+        <run>
+            <script name="fio_reconnect"/>
+            <arg name="runtime_sec" value="180"/>
+        </run>
+
+        <run>
+            <script name="fio_multi_stability">
+                <req id="MULTI"/>
+            </script>
+            <arg name="env">
+                <value ref="env.switch.init-to-2xtgt"/>
+                <value ref="env.switch.2xinit-to-tgt"/>
+                <value ref="env.switch.2xinit-to-2xtgt"/>
+                <value ref="env.switch.init-to-5xtgt"/>
+                <value ref="env.switch.5xinit-to-tgt"/>
+            </arg>
+            <arg name="if_delay_msec">
+                <value>0</value>
+                <value>10</value>
+                <value>100</value>
+            </arg>
+            <arg name="if_loss_proc">
+                <value>0</value>
+                <value>25</value>
+                <value>50</value>
+                <value>75</value>
+                <value>100</value>
+            </arg>
+            <arg name="if_corruption_prob">
+                <value>0</value>
+                <value>5</value>
+                <value>10</value>
+            </arg>
+        </run>
+
+    </session>
+</package>

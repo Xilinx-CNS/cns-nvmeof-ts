@@ -1,0 +1,26 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/* (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. */
+/**
+
+@defgroup stability Stability under issues
+@ingroup spec
+@{
+
+The test package runs traffic (mostly block FIO) and interferes with the
+transport level and below in non-fatal way.
+
+@author Nikita Somenkov <Nikita.Somenkov@oktetlabs.ru>
+
+@par Tests:
+
+-# @ref stability-fio_disconnparallel
+-# @ref stability-fio_dupconn
+-# @ref stability-fio_multi_stability
+-# @ref stability-iperf
+-# @ref stability-fio_reconnect
+-# @ref stability-fio_stability
+-# @ref stability-fio_updown
+
+@} usecases
+*/
+

@@ -1,0 +1,136 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/* (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. */
+/**
+
+@defgroup run Running the suite
+@ingroup nvme_ts
+@{
+@section run-fast If you know what you're doing
+Generic execution instructions are outlined below. Note, that it assumes you
+have @b ts_conf, @b te an @b nvmeof-ts repositories checkout on the same level.
+
+Just run:
+
+@code
+export TE_BASE=$PWD/te
+cd nvmeof-ts
+# Build tests and engine
+./run.sh --cfg=<config name> --build-only
+# Run test
+./run.sh --cfg=<config name> -q -n --tester-run=nvmeof-ts/<test>
+# Read logs
+./log.sh # read text log
+./scripts/html-log.sh # read html log
+@endcode
+
+Deploy and run:
+@code
+export TE_BASE=$PWD/te
+cd nvmeof-ts
+# Build tools ; assumes you have conf/env.$USER that looks like:
+# $ cat conf/env.${USERNAME}
+# export SF_NVME_DIR=<path to nvmf>
+# export SF_FIO_DIR=<path to FIO>
+# export SF_NVME_CLI_DIR=<path to nvme-cli>
+
+./scripts/deploy -b
+
+# Build tests and engine
+./run.sh --cfg=<config name> --build-only
+
+# Run test
+./run.sh --cfg=<config name> -q -n --tester-run=nvmeof-ts/<test>
+
+# Read logs
+./log.sh # read text log
+@endcode
+
+@section run-build Build details
+
+It's important to understand one thing -- currently all test configurations are
+using @b local builds, i.e. they're building test agents on the same host you're
+running ./run.sh on. This implies that you should be in sync, i.e. your binary
+should be executable with the libc etc. of the target. Rule of thumb - run on
+the same system.
+
+Alternatively you can edit conf/run.conf.<cfg name> and set builder conf to
+builder.conf.target. This will have the following impact:
+
+  - you'll start building on the target hosts (i.e. initiator/target hosts),
+  - you MUST have NFS on the target.
+
+@section run-deploy Deploy tools and modules on the hosts
+
+When running outside of runbench you may want to deploy the tools. That's easy:
+
+@code
+export SF_NVME_DIR=<path to nvmf>
+export SF_FIO_DIR=<path to FIO>
+export SF_NVME_CLI_DIR=<path to nvme-cli>
+@endcode
+
+and then do
+
+@code
+./scripts/deploy -b
+@endcode
+
+to build all the tools and put them into pre-storage (@b /tmp/nvme_deploy). See
+help for more options, but keep in mind that some might be under construction.
+
+Then you can run the normal way + add arguments:
+
+@code
+./run.sh ... --sf-copy --sf-load
+@endcode
+
+to copy tools on each host (TE knows which modules to copy to targets and which
+to initiator) and then load things. If you already have things loaded, but just
+want to copy nvme binary and latest fio binary -- remove the @b --sf-load
+option.
+
+@} 
+
+*/
+
+/**
+
+@defgroup run-nullblk Automatic NullBlk devices configuration
+@ingroup  run
+
+@{
+
+Prologue can automatically create nullblk devices for you. For this for every
+TSTX you should export corresponding variables.
+
+There is a shortcut. You can say:
+
+@code
+for i in $(seq 1 max_tst_num) ; do
+    eval export TE_TST${i}_BLOCK=nullb
+    eval export TE_TST${i}_BLOCK_N=2
+done
+@endcode
+
+and magic in nvmeof-ts/conf/scripts.agent will fill things in for you. If you
+want granular control - read ts_conf/cs.conf.inc.nullblk file that has
+per-device settings:
+
+@code
+  <add cond="${TE_TST1_NULLBLOCK:-false}">
+    <instance oid="/local:${TE_TST1_TA_NAME}/nullblk:"/>
+    <instance oid="/local:${TE_TST1_TA_NAME}/nullblk:/parameter:nr_devices"
+              value="${TE_TST1_BLOCK_N:-2}"/>
+    <instance oid="/local:${TE_TST1_TA_NAME}/nullblk:/parameter:submit_queues"
+              value="${TE_TST1_BLOCK_SUBMIT_QUEUES:-2}"/>
+    <instance oid="/local:${TE_TST1_TA_NAME}/nullblk:/parameter:hw_queue_depth"
+              value="${TE_TST1_BLOCK_QDEPTH:-64}"/>
+    <instance oid="/local:${TE_TST1_TA_NAME}/nullblk:/parameter:gb"
+              value="${TE_TST1_BLOCK_GB:-2}"/>
+  </add>
+...
+@endcode
+
+@}
+
+*/

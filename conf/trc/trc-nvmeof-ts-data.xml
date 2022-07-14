@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<test name="data" type="package">
+    <objective>Validate datapass</objective>
+    <iter result="PASSED">
+        <test name="fio_pattern" type="script">
+            <objective>Check that list command works</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+            </iter>
+        </test>
+    </iter>
+</test>

@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<package version="1.0">
+
+    <description>Performance testing</description>
+
+    <author mailto="Nikita.Somenkov@oktetlabs.ru"/>
+
+    <session track_conf="silent">
+        <!--default values-->
+        <arg name="env">
+            <value ref="env.init-to-tgt"/>
+        </arg>
+
+        <!--FIO default options-->
+        <arg name="blocksize" type="fio.blocksize.512-32k"/>
+        <arg name="rwmixread" type="fio.rwmixread.rw_only"/>
+        <arg name="ioengine" value="sync"/>
+        <arg name="numjobs" value="1"/>
+        <arg name="rwtype" value="rand"/>
+        <arg name="iodepth" value="1"/>
+        <arg name="runtime_sec" value="10"/>
+
+        <!--interface default options-->
+        <arg name="mtu" value="9000"/>
+        <arg name="tso" value="on"/>
+        <arg name="lro" value="off"/>
+
+        <!--All fio_simple tests-->
+        <run name="fio_simple">
+            <script name="fio_simple">
+                <req id="LONG"/>
+            </script>
+
+            <!--interface options-->
+            <arg name="mtu" type="tapi.mtu"/>
+            <arg name="tso" type="tapi.tso"/>
+            <arg name="lro" type="tapi.lro"/>
+
+            <!--FIO options-->
+            <arg name="ioengine" type="fio.ioengine"/>
+            <arg name="rwtype" type="fio.rwtype"/>
+            <arg name="rwmixread" type="fio.rwmixread.0-100"/>
+            <arg name="numjobs" type="fio.numjobs.1-1024"/>
+            <arg name="iodepth" type="fio.iodepth.1-64"/>
+            <arg name="blocksize" type="fio.blocksize.512-32k"/>
+        </run>
+
+        <!-- No iterations, just check 1 request latency -->
+        <run name="fio_1req_latency">
+            <script name="fio_simple">
+                <req id="FIO_1REQ_LAT"/>
+            </script>
+            <arg name="iodepth" value="1"/>
+            <arg name="numjobs" value="1"/>
+            <arg name="perf_type" value="latency"/>
+        </run>
+
+        <!--Iterating through the QD-->
+        <run name="fio_simple_qd">
+            <script name="fio_simple">
+                <req id="FIO_SIMPLE_QD"/>
+            </script>
+            <arg name="iodepth" type="fio.iodepth.1-64"/>
+            <arg name="perf_type" value="latency"/>
+            <arg name="ioengine" value="libaio"/>
+        </run>
+
+        <!--(Reduce version) Base throughput test matrix-->
+        <run name="fio_simple_base_throughput_reduced">
+            <script name="fio_simple">
+                <req id="FIO_SIMPLE_BASE_THROUGHPUT_REDUCED"/>
+            </script>
+            <arg name="ioengine" value="libaio"/>
+            <arg name="iodepth" value="64"/>
+            <arg name="numjobs" type="fio.numjobs.reduced.1-32"/>
+            <arg name="perf_type" value="throughput"/>
+        </run>
+
+        <!--Iterating through the threads-->
+        <run name="fio_simple_threads">
+            <script name="fio_simple">
+                <req id="FIO_SIMPLE_THREADS"/>
+            </script>
+            <arg name="iodepth" value="1"/>
+            <arg name="numjobs" type="fio.numjobs.1-32,n,2n"/>
+            <arg name="perf_type" value="throughput"/>
+        </run>
+
+        <!--Base throughput test matrix-->
+        <run name="fio_simple_base_throughput">
+            <script name="fio_simple">
+                <req id="FIO_SIMPLE_BASE_THROUGHPUT"/>
+            </script>
+            <arg name="ioengine" value="libaio"/>
+            <arg name="numjobs" type="fio.numjobs.1-1024"/>
+            <arg name="iodepth">
+                <value>32</value>
+                <value>64</value>
+                <!--<value>maxQD</value>>-->
+                <!--TODO From Mikhail Skorzhinskii:-->
+                <!--Max QD calculated in such way: run some test util the-->
+                <!--perfomance will be maxed out. It very dependent on-->
+                <!--machines, NICs, host configuration, test itself and-->
+                <!--Saturn position. Probably we can calculate this value-->
+                <!--for every host, picking a few different tests and then-->
+                <!--place these values into the host description. However,-->
+                <!--while this excersice could be very usefull, I'm okay-->
+                <!--with skipping this test right now, we just need to-->
+                <!--leave a comment here what do we want and discuss exact-->
+                <!--implementation later.-->
+            </arg>
+            <arg name="perf_type" value="throughput"/>
+        </run>
+
+        <!--Mixed throughput base-->
+        <run name="fio_simple_threads_mixed_throughput">
+            <script name="fio_simple">
+                <req id="FIO_SIMPLE_THREADS_MIXED_THROUGHPUT"/>
+            </script>
+            <arg name="ioengine" value="libaio"/>
+            <arg name="iodepth" value="64"/>
+            <arg name="numjobs" type="fio.numjobs.reduced.1-32"/>
+            <arg name="rwmixread" type="fio.rwmixread.mixed"/>
+            <arg name="perf_type" value="throughput"/>
+        </run>
+
+        <!-- Block size iteration tests -->
+        <run name="fio_simple_bs_iterate">
+            <script name="fio_simple">
+                <req id="FIO_SIMPLE_BS_ITERATE"/>
+            </script>
+            <arg name="blocksize">
+                <value>512</value>
+                <value>4096</value>
+                <value>65536</value>
+                <value>131072</value>
+                <value>262144</value>
+                <value>524288</value>
+                <value>1024000</value>
+            </arg>
+            <arg name="is_shuffle_blocksize">
+                <value>TRUE</value>
+            </arg>
+            <arg name="ioengine" value="libaio"/>
+            <arg name="numjobs" value="4"/>
+            <arg name="iodepth" value="32"/>
+            <arg name="perf_type" value="throughput"/>
+        </run>
+
+        <!-- Block size throughput tests -->
+        <run name="fio_simple_bs_iterate_throughput">
+            <script name="fio_simple">
+                <req id="FIO_SIMPLE_BS_ITERATE_THROUGHPUT"/>
+            </script>
+            <arg name="blocksize">
+                <value>512</value>
+                <value>4096</value>
+                <value>65536</value>
+                <value>131072</value>
+                <value>262144</value>
+                <value>524288</value>
+                <value>1024000</value>
+            </arg>
+            <arg name="is_shuffle_blocksize">
+                <value>FALSE</value>
+            </arg>
+            <arg name="ioengine" value="libaio"/>
+            <arg name="numjobs" value="1"/>
+            <arg name="iodepth" type="fio.iodepth.1-64"/>
+            <arg name="perf_type" value="latency"/>
+        </run>
+
+        <run name="fio_simple_onvme_specific_param">
+            <script name="fio_simple">
+                <req id="ONVME_TARGET"/>
+            </script>
+            <arg name="onvme_max_worker_conn">
+                <value>default</value>
+                <value>5</value>
+                <value>7</value>
+                <value>15</value>
+            </arg>
+            <arg name="onvme_cores">
+                <value>default</value>
+                <value>numa-local</value>
+                <value>1</value>
+                <value>2</value>
+                <value>4</value>
+                <value>6</value>
+                <value>8</value>
+                <value>10</value>
+            </arg>
+        </run>
+
+        <run name="fio_multi">
+            <script name="fio_multi">
+                <req id="MULTI"/>
+            </script>
+            <arg name="env">
+                <value ref="env.switch.init-to-2xtgt"/>
+                <value ref="env.switch.2xinit-to-tgt"/>
+                <value ref="env.switch.2xinit-to-2xtgt"/>
+                <value ref="env.switch.init-to-5xtgt"/>
+                <value ref="env.switch.5xinit-to-tgt"/>
+            </arg>
+
+            <!--fio options-->
+            <arg name="blocksize">
+                <value>4096</value>
+            </arg>
+            <arg name="ioengine" type="fio.ioengine">
+                <value>libaio</value>
+            </arg>
+            <arg name="numjobs" type="fio.numjobs.1-1024">
+                <value>1</value>
+                <value>32</value>
+            </arg>
+            <arg name="rwtype" type="fio.rwtype">
+                <value>seq</value>
+            </arg>
+            <arg name="iodepth" type="fio.iodepth.1-64">
+                <value>32</value>
+            </arg>
+            <arg name="rwmixread" type="fio.rwmixread.0-100">
+                <value>0</value>
+                <value>30</value>
+                <value>70</value>
+                <value>100</value>
+            </arg>
+            <arg name="runtime_sec">
+                <value>120</value>
+            </arg>
+
+            <!--tapi options-->
+            <arg name="mtu" type="tapi.mtu"/>
+            <arg name="tso" type="tapi.tso">
+                <value>on</value>
+            </arg>
+            <arg name="lro" type="tapi.lro">
+                <value>on</value>
+            </arg>
+        </run>
+
+    </session>
+</package>
+

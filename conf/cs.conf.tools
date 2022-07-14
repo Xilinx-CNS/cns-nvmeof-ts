@@ -1,0 +1,476 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<history>
+  <register>
+    <!-- CLI tools -->
+    <object oid="/local/tools"
+            access="read_create" type="string"/>
+    <object oid="/local/tools/nvme-cli"
+            access="read_create" type="string"/>
+    <object oid="/local/tools/fio"
+            access="read_create" type="string"/>
+
+    <!-- Common kernel module -->
+    <object oid="/local/tools/libcrc32c"
+            access="read_create" type="string"/>
+
+
+    <!-- Initiator kernel modules -->
+    <object oid="/local/tools/nvme-core"
+            access="read_create" type="string"/>
+    <object oid="/local/tools/nvme"
+            access="read_create" type="string"/>
+    <object oid="/local/tools/nvme-fabrics"
+            access="read_create" type="string"/>
+    <object oid="/local/tools/nvme-tcp"
+            access="read_create" type="string"/>
+
+    <!-- Target kernel modules -->
+    <object oid="/local/tools/nvmet"
+            access="read_create" type="string"/>
+    <object oid="/local/tools/nvmet-tcp"
+            access="read_create" type="string"/>
+  </register>
+
+  <!-- ONE -->
+  <add cond="${TE_IUT1:-false}">
+    <instance oid="/local:${TE_IUT1_TA_NAME}/tools:"/>
+    <!-- Initiator modules -->
+    <instance oid="/agent:${TE_IUT1_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_IUT1_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_IUT1_TA_NAME}/rsrc:module_nvme_core"
+              value="/agent:${TE_IUT1_TA_NAME}/module:nvme_core"/>
+    <instance oid="/agent:${TE_IUT1_TA_NAME}/rsrc:module_nvme"
+              value="/agent:${TE_IUT1_TA_NAME}/module:nvme"/>
+    <instance oid="/agent:${TE_IUT1_TA_NAME}/rsrc:module_nvme_fabrics"
+              value="/agent:${TE_IUT1_TA_NAME}/module:nvme_fabrics"/>
+    <instance oid="/agent:${TE_IUT1_TA_NAME}/rsrc:module_nvme_tcp"
+              value="/agent:${TE_IUT1_TA_NAME}/module:nvme_tcp"/>
+
+    <!-- Initiator tools -->
+    <instance oid="/local:${TE_IUT1_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_IUT1_TA_NAME}/tools:/nvme-core:" value="${SF_DEPLOY_DIR}/nvme-core"/>
+    <instance oid="/local:${TE_IUT1_TA_NAME}/tools:/nvme:" value="${SF_DEPLOY_DIR}/nvme"/>
+    <instance oid="/local:${TE_IUT1_TA_NAME}/tools:/nvme-fabrics:" value="${SF_DEPLOY_DIR}/nvme-fabrics"/>
+    <instance oid="/local:${TE_IUT1_TA_NAME}/tools:/nvme-tcp:" value="${SF_DEPLOY_DIR}/nvme-tcp"/>
+    <instance oid="/local:${TE_IUT1_TA_NAME}/tools:/fio:" value="${SF_FIO}"/>
+    <instance oid="/local:${TE_IUT1_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <add cond="${TE_TST1:-false}">
+    <instance oid="/local:${TE_TST1_TA_NAME}/tools:"/>
+    <!-- Target modules -->
+    <instance oid="/agent:${TE_TST1_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_TST1_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_TST1_TA_NAME}/rsrc:module_nvmet"
+              value="/agent:${TE_TST1_TA_NAME}/module:nvmet"/>
+    <instance oid="/agent:${TE_TST1_TA_NAME}/rsrc:module_nvmet_tcp"
+              value="/agent:${TE_TST1_TA_NAME}/module:nvmet_tcp"/>
+
+    <!-- Target tools -->
+    <instance oid="/local:${TE_TST1_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_TST1_TA_NAME}/tools:/nvmet:" value="${SF_DEPLOY_DIR}/nvmet"/>
+    <instance oid="/local:${TE_TST1_TA_NAME}/tools:/nvmet-tcp:" value="${SF_DEPLOY_DIR}/nvmet-tcp"/>
+    <instance oid="/local:${TE_TST1_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <!-- TWO -->
+  <add cond="${TE_IUT2:-false}">
+    <instance oid="/local:${TE_IUT2_TA_NAME}/tools:"/>
+    <!-- Initiator modules -->
+    <instance oid="/agent:${TE_IUT2_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_IUT2_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_IUT2_TA_NAME}/rsrc:module_nvme_core"
+              value="/agent:${TE_IUT2_TA_NAME}/module:nvme_core"/>
+    <instance oid="/agent:${TE_IUT2_TA_NAME}/rsrc:module_nvme"
+              value="/agent:${TE_IUT2_TA_NAME}/module:nvme"/>
+    <instance oid="/agent:${TE_IUT2_TA_NAME}/rsrc:module_nvme_fabrics"
+              value="/agent:${TE_IUT2_TA_NAME}/module:nvme_fabrics"/>
+    <instance oid="/agent:${TE_IUT2_TA_NAME}/rsrc:module_nvme_tcp"
+              value="/agent:${TE_IUT2_TA_NAME}/module:nvme_tcp"/>
+
+    <!-- Initiator tools -->
+    <instance oid="/local:${TE_IUT2_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_IUT2_TA_NAME}/tools:/nvme-core:" value="${SF_DEPLOY_DIR}/nvme-core"/>
+    <instance oid="/local:${TE_IUT2_TA_NAME}/tools:/nvme:" value="${SF_DEPLOY_DIR}/nvme"/>
+    <instance oid="/local:${TE_IUT2_TA_NAME}/tools:/nvme-fabrics:" value="${SF_DEPLOY_DIR}/nvme-fabrics"/>
+    <instance oid="/local:${TE_IUT2_TA_NAME}/tools:/nvme-tcp:" value="${SF_DEPLOY_DIR}/nvme-tcp"/>
+    <instance oid="/local:${TE_IUT2_TA_NAME}/tools:/fio:" value="${SF_FIO}"/>
+    <instance oid="/local:${TE_IUT2_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <add cond="${TE_TST2:-false}">
+    <instance oid="/local:${TE_TST2_TA_NAME}/tools:"/>
+    <!-- Target modules -->
+    <instance oid="/agent:${TE_TST2_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_TST2_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_TST2_TA_NAME}/rsrc:module_nvmet"
+              value="/agent:${TE_TST2_TA_NAME}/module:nvmet"/>
+    <instance oid="/agent:${TE_TST2_TA_NAME}/rsrc:module_nvmet_tcp"
+              value="/agent:${TE_TST2_TA_NAME}/module:nvmet_tcp"/>
+
+    <!-- Target tools -->
+    <instance oid="/local:${TE_TST2_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_TST2_TA_NAME}/tools:/nvmet:" value="${SF_DEPLOY_DIR}/nvmet"/>
+    <instance oid="/local:${TE_TST2_TA_NAME}/tools:/nvmet-tcp:" value="${SF_DEPLOY_DIR}/nvmet-tcp"/>
+    <instance oid="/local:${TE_TST2_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <!-- THREE -->
+  <add cond="${TE_IUT3:-false}">
+    <instance oid="/local:${TE_IUT3_TA_NAME}/tools:"/>
+    <!-- Initiator modules -->
+    <instance oid="/agent:${TE_IUT3_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_IUT3_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_IUT3_TA_NAME}/rsrc:module_nvme_core"
+              value="/agent:${TE_IUT3_TA_NAME}/module:nvme_core"/>
+    <instance oid="/agent:${TE_IUT3_TA_NAME}/rsrc:module_nvme"
+              value="/agent:${TE_IUT3_TA_NAME}/module:nvme"/>
+    <instance oid="/agent:${TE_IUT3_TA_NAME}/rsrc:module_nvme_fabrics"
+              value="/agent:${TE_IUT3_TA_NAME}/module:nvme_fabrics"/>
+    <instance oid="/agent:${TE_IUT3_TA_NAME}/rsrc:module_nvme_tcp"
+              value="/agent:${TE_IUT3_TA_NAME}/module:nvme_tcp"/>
+
+    <!-- Initiator tools -->
+    <instance oid="/local:${TE_IUT3_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_IUT3_TA_NAME}/tools:/nvme-core:" value="${SF_DEPLOY_DIR}/nvme-core"/>
+    <instance oid="/local:${TE_IUT3_TA_NAME}/tools:/nvme:" value="${SF_DEPLOY_DIR}/nvme"/>
+    <instance oid="/local:${TE_IUT3_TA_NAME}/tools:/nvme-fabrics:" value="${SF_DEPLOY_DIR}/nvme-fabrics"/>
+    <instance oid="/local:${TE_IUT3_TA_NAME}/tools:/nvme-tcp:" value="${SF_DEPLOY_DIR}/nvme-tcp"/>
+    <instance oid="/local:${TE_IUT3_TA_NAME}/tools:/fio:" value="${SF_FIO}"/>
+    <instance oid="/local:${TE_IUT3_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <add cond="${TE_TST3:-false}">
+    <instance oid="/local:${TE_TST3_TA_NAME}/tools:"/>
+    <!-- Target modules -->
+    <instance oid="/agent:${TE_TST3_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_TST3_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_TST3_TA_NAME}/rsrc:module_nvmet"
+              value="/agent:${TE_TST3_TA_NAME}/module:nvmet"/>
+    <instance oid="/agent:${TE_TST3_TA_NAME}/rsrc:module_nvmet_tcp"
+              value="/agent:${TE_TST3_TA_NAME}/module:nvmet_tcp"/>
+
+    <!-- Target tools -->
+    <instance oid="/local:${TE_TST3_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_TST3_TA_NAME}/tools:/nvmet:" value="${SF_DEPLOY_DIR}/nvmet"/>
+    <instance oid="/local:${TE_TST3_TA_NAME}/tools:/nvmet-tcp:" value="${SF_DEPLOY_DIR}/nvmet-tcp"/>
+    <instance oid="/local:${TE_TST3_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <!-- FOUR -->
+  <add cond="${TE_IUT4:-false}">
+    <instance oid="/local:${TE_IUT4_TA_NAME}/tools:"/>
+    <!-- Initiator modules -->
+    <instance oid="/agent:${TE_IUT4_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_IUT4_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_IUT4_TA_NAME}/rsrc:module_nvme_core"
+              value="/agent:${TE_IUT4_TA_NAME}/module:nvme_core"/>
+    <instance oid="/agent:${TE_IUT4_TA_NAME}/rsrc:module_nvme"
+              value="/agent:${TE_IUT4_TA_NAME}/module:nvme"/>
+    <instance oid="/agent:${TE_IUT4_TA_NAME}/rsrc:module_nvme_fabrics"
+              value="/agent:${TE_IUT4_TA_NAME}/module:nvme_fabrics"/>
+    <instance oid="/agent:${TE_IUT4_TA_NAME}/rsrc:module_nvme_tcp"
+              value="/agent:${TE_IUT4_TA_NAME}/module:nvme_tcp"/>
+
+    <!-- Initiator tools -->
+    <instance oid="/local:${TE_IUT4_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_IUT4_TA_NAME}/tools:/nvme-core:" value="${SF_DEPLOY_DIR}/nvme-core"/>
+    <instance oid="/local:${TE_IUT4_TA_NAME}/tools:/nvme:" value="${SF_DEPLOY_DIR}/nvme"/>
+    <instance oid="/local:${TE_IUT4_TA_NAME}/tools:/nvme-fabrics:" value="${SF_DEPLOY_DIR}/nvme-fabrics"/>
+    <instance oid="/local:${TE_IUT4_TA_NAME}/tools:/nvme-tcp:" value="${SF_DEPLOY_DIR}/nvme-tcp"/>
+    <instance oid="/local:${TE_IUT4_TA_NAME}/tools:/fio:" value="${SF_FIO}"/>
+    <instance oid="/local:${TE_IUT4_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <add cond="${TE_TST4:-false}">
+    <instance oid="/local:${TE_TST4_TA_NAME}/tools:"/>
+    <!-- Target modules -->
+    <instance oid="/agent:${TE_TST4_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_TST4_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_TST4_TA_NAME}/rsrc:module_nvmet"
+              value="/agent:${TE_TST4_TA_NAME}/module:nvmet"/>
+    <instance oid="/agent:${TE_TST4_TA_NAME}/rsrc:module_nvmet_tcp"
+              value="/agent:${TE_TST4_TA_NAME}/module:nvmet_tcp"/>
+
+    <!-- Target tools -->
+    <instance oid="/local:${TE_TST4_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_TST4_TA_NAME}/tools:/nvmet:" value="${SF_DEPLOY_DIR}/nvmet"/>
+    <instance oid="/local:${TE_TST4_TA_NAME}/tools:/nvmet-tcp:" value="${SF_DEPLOY_DIR}/nvmet-tcp"/>
+    <instance oid="/local:${TE_TST4_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <!-- FIVE -->
+  <add cond="${TE_IUT5:-false}">
+    <instance oid="/local:${TE_IUT5_TA_NAME}/tools:"/>
+    <!-- Initiator modules -->
+    <instance oid="/agent:${TE_IUT5_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_IUT5_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_IUT5_TA_NAME}/rsrc:module_nvme_core"
+              value="/agent:${TE_IUT5_TA_NAME}/module:nvme_core"/>
+    <instance oid="/agent:${TE_IUT5_TA_NAME}/rsrc:module_nvme"
+              value="/agent:${TE_IUT5_TA_NAME}/module:nvme"/>
+    <instance oid="/agent:${TE_IUT5_TA_NAME}/rsrc:module_nvme_fabrics"
+              value="/agent:${TE_IUT5_TA_NAME}/module:nvme_fabrics"/>
+    <instance oid="/agent:${TE_IUT5_TA_NAME}/rsrc:module_nvme_tcp"
+              value="/agent:${TE_IUT5_TA_NAME}/module:nvme_tcp"/>
+
+    <!-- Initiator tools -->
+    <instance oid="/local:${TE_IUT5_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_IUT5_TA_NAME}/tools:/nvme-core:" value="${SF_DEPLOY_DIR}/nvme-core"/>
+    <instance oid="/local:${TE_IUT5_TA_NAME}/tools:/nvme:" value="${SF_DEPLOY_DIR}/nvme"/>
+    <instance oid="/local:${TE_IUT5_TA_NAME}/tools:/nvme-fabrics:" value="${SF_DEPLOY_DIR}/nvme-fabrics"/>
+    <instance oid="/local:${TE_IUT5_TA_NAME}/tools:/nvme-tcp:" value="${SF_DEPLOY_DIR}/nvme-tcp"/>
+    <instance oid="/local:${TE_IUT5_TA_NAME}/tools:/fio:" value="${SF_FIO}"/>
+    <instance oid="/local:${TE_IUT5_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <add cond="${TE_TST5:-false}">
+    <instance oid="/local:${TE_TST5_TA_NAME}/tools:"/>
+    <!-- Target modules -->
+    <instance oid="/agent:${TE_TST5_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_TST5_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_TST5_TA_NAME}/rsrc:module_nvmet"
+              value="/agent:${TE_TST5_TA_NAME}/module:nvmet"/>
+    <instance oid="/agent:${TE_TST5_TA_NAME}/rsrc:module_nvmet_tcp"
+              value="/agent:${TE_TST5_TA_NAME}/module:nvmet_tcp"/>
+
+    <!-- Target tools -->
+    <instance oid="/local:${TE_TST5_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_TST5_TA_NAME}/tools:/nvmet:" value="${SF_DEPLOY_DIR}/nvmet"/>
+    <instance oid="/local:${TE_TST5_TA_NAME}/tools:/nvmet-tcp:" value="${SF_DEPLOY_DIR}/nvmet-tcp"/>
+    <instance oid="/local:${TE_TST5_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <!-- SIX -->
+  <add cond="${TE_IUT6:-false}">
+    <instance oid="/local:${TE_IUT6_TA_NAME}/tools:"/>
+    <!-- Initiator modules -->
+    <instance oid="/agent:${TE_IUT6_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_IUT6_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_IUT6_TA_NAME}/rsrc:module_nvme_core"
+              value="/agent:${TE_IUT6_TA_NAME}/module:nvme_core"/>
+    <instance oid="/agent:${TE_IUT6_TA_NAME}/rsrc:module_nvme"
+              value="/agent:${TE_IUT6_TA_NAME}/module:nvme"/>
+    <instance oid="/agent:${TE_IUT6_TA_NAME}/rsrc:module_nvme_fabrics"
+              value="/agent:${TE_IUT6_TA_NAME}/module:nvme_fabrics"/>
+    <instance oid="/agent:${TE_IUT6_TA_NAME}/rsrc:module_nvme_tcp"
+              value="/agent:${TE_IUT6_TA_NAME}/module:nvme_tcp"/>
+
+    <!-- Initiator tools -->
+    <instance oid="/local:${TE_IUT6_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_IUT6_TA_NAME}/tools:/nvme-core:" value="${SF_DEPLOY_DIR}/nvme-core"/>
+    <instance oid="/local:${TE_IUT6_TA_NAME}/tools:/nvme:" value="${SF_DEPLOY_DIR}/nvme"/>
+    <instance oid="/local:${TE_IUT6_TA_NAME}/tools:/nvme-fabrics:" value="${SF_DEPLOY_DIR}/nvme-fabrics"/>
+    <instance oid="/local:${TE_IUT6_TA_NAME}/tools:/nvme-tcp:" value="${SF_DEPLOY_DIR}/nvme-tcp"/>
+    <instance oid="/local:${TE_IUT6_TA_NAME}/tools:/fio:" value="${SF_FIO}"/>
+    <instance oid="/local:${TE_IUT6_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <add cond="${TE_TST6:-false}">
+    <instance oid="/local:${TE_TST6_TA_NAME}/tools:"/>
+    <!-- Target modules -->
+    <instance oid="/agent:${TE_TST6_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_TST6_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_TST6_TA_NAME}/rsrc:module_nvmet"
+              value="/agent:${TE_TST6_TA_NAME}/module:nvmet"/>
+    <instance oid="/agent:${TE_TST6_TA_NAME}/rsrc:module_nvmet_tcp"
+              value="/agent:${TE_TST6_TA_NAME}/module:nvmet_tcp"/>
+
+    <!-- Target tools -->
+    <instance oid="/local:${TE_TST6_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_TST6_TA_NAME}/tools:/nvmet:" value="${SF_DEPLOY_DIR}/nvmet"/>
+    <instance oid="/local:${TE_TST6_TA_NAME}/tools:/nvmet-tcp:" value="${SF_DEPLOY_DIR}/nvmet-tcp"/>
+    <instance oid="/local:${TE_TST6_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <!-- SEVEN -->
+  <add cond="${TE_IUT7:-false}">
+    <instance oid="/local:${TE_IUT7_TA_NAME}/tools:"/>
+    <!-- Initiator modules -->
+    <instance oid="/agent:${TE_IUT7_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_IUT7_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_IUT7_TA_NAME}/rsrc:module_nvme_core"
+              value="/agent:${TE_IUT7_TA_NAME}/module:nvme_core"/>
+    <instance oid="/agent:${TE_IUT7_TA_NAME}/rsrc:module_nvme"
+              value="/agent:${TE_IUT7_TA_NAME}/module:nvme"/>
+    <instance oid="/agent:${TE_IUT7_TA_NAME}/rsrc:module_nvme_fabrics"
+              value="/agent:${TE_IUT7_TA_NAME}/module:nvme_fabrics"/>
+    <instance oid="/agent:${TE_IUT7_TA_NAME}/rsrc:module_nvme_tcp"
+              value="/agent:${TE_IUT7_TA_NAME}/module:nvme_tcp"/>
+
+    <!-- Initiator tools -->
+    <instance oid="/local:${TE_IUT7_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_IUT7_TA_NAME}/tools:/nvme-core:" value="${SF_DEPLOY_DIR}/nvme-core"/>
+    <instance oid="/local:${TE_IUT7_TA_NAME}/tools:/nvme:" value="${SF_DEPLOY_DIR}/nvme"/>
+    <instance oid="/local:${TE_IUT7_TA_NAME}/tools:/nvme-fabrics:" value="${SF_DEPLOY_DIR}/nvme-fabrics"/>
+    <instance oid="/local:${TE_IUT7_TA_NAME}/tools:/nvme-tcp:" value="${SF_DEPLOY_DIR}/nvme-tcp"/>
+    <instance oid="/local:${TE_IUT7_TA_NAME}/tools:/fio:" value="${SF_FIO}"/>
+    <instance oid="/local:${TE_IUT7_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <add cond="${TE_TST7:-false}">
+    <instance oid="/local:${TE_TST7_TA_NAME}/tools:"/>
+    <!-- Target modules -->
+    <instance oid="/agent:${TE_TST7_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_TST7_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_TST7_TA_NAME}/rsrc:module_nvmet"
+              value="/agent:${TE_TST7_TA_NAME}/module:nvmet"/>
+    <instance oid="/agent:${TE_TST7_TA_NAME}/rsrc:module_nvmet_tcp"
+              value="/agent:${TE_TST7_TA_NAME}/module:nvmet_tcp"/>
+
+    <!-- Target tools -->
+    <instance oid="/local:${TE_TST7_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_TST7_TA_NAME}/tools:/nvmet:" value="${SF_DEPLOY_DIR}/nvmet"/>
+    <instance oid="/local:${TE_TST7_TA_NAME}/tools:/nvmet-tcp:" value="${SF_DEPLOY_DIR}/nvmet-tcp"/>
+    <instance oid="/local:${TE_TST7_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <!-- EIGHT -->
+  <add cond="${TE_IUT8:-false}">
+    <instance oid="/local:${TE_IUT8_TA_NAME}/tools:"/>
+    <!-- Initiator modules -->
+    <instance oid="/agent:${TE_IUT8_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_IUT8_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_IUT8_TA_NAME}/rsrc:module_nvme_core"
+              value="/agent:${TE_IUT8_TA_NAME}/module:nvme_core"/>
+    <instance oid="/agent:${TE_IUT8_TA_NAME}/rsrc:module_nvme"
+              value="/agent:${TE_IUT8_TA_NAME}/module:nvme"/>
+    <instance oid="/agent:${TE_IUT8_TA_NAME}/rsrc:module_nvme_fabrics"
+              value="/agent:${TE_IUT8_TA_NAME}/module:nvme_fabrics"/>
+    <instance oid="/agent:${TE_IUT8_TA_NAME}/rsrc:module_nvme_tcp"
+              value="/agent:${TE_IUT8_TA_NAME}/module:nvme_tcp"/>
+
+    <!-- Initiator tools -->
+    <instance oid="/local:${TE_IUT8_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_IUT8_TA_NAME}/tools:/nvme-core:" value="${SF_DEPLOY_DIR}/nvme-core"/>
+    <instance oid="/local:${TE_IUT8_TA_NAME}/tools:/nvme:" value="${SF_DEPLOY_DIR}/nvme"/>
+    <instance oid="/local:${TE_IUT8_TA_NAME}/tools:/nvme-fabrics:" value="${SF_DEPLOY_DIR}/nvme-fabrics"/>
+    <instance oid="/local:${TE_IUT8_TA_NAME}/tools:/nvme-tcp:" value="${SF_DEPLOY_DIR}/nvme-tcp"/>
+    <instance oid="/local:${TE_IUT8_TA_NAME}/tools:/fio:" value="${SF_FIO}"/>
+    <instance oid="/local:${TE_IUT8_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <add cond="${TE_TST8:-false}">
+    <instance oid="/local:${TE_TST8_TA_NAME}/tools:"/>
+    <!-- Target modules -->
+    <instance oid="/agent:${TE_TST8_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_TST8_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_TST8_TA_NAME}/rsrc:module_nvmet"
+              value="/agent:${TE_TST8_TA_NAME}/module:nvmet"/>
+    <instance oid="/agent:${TE_TST8_TA_NAME}/rsrc:module_nvmet_tcp"
+              value="/agent:${TE_TST8_TA_NAME}/module:nvmet_tcp"/>
+
+    <!-- Target tools -->
+    <instance oid="/local:${TE_TST8_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_TST8_TA_NAME}/tools:/nvmet:" value="${SF_DEPLOY_DIR}/nvmet"/>
+    <instance oid="/local:${TE_TST8_TA_NAME}/tools:/nvmet-tcp:" value="${SF_DEPLOY_DIR}/nvmet-tcp"/>
+    <instance oid="/local:${TE_TST8_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <!-- NINE -->
+  <add cond="${TE_IUT9:-false}">
+    <instance oid="/local:${TE_IUT9_TA_NAME}/tools:"/>
+    <!-- Initiator modules -->
+    <instance oid="/agent:${TE_IUT9_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_IUT9_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_IUT9_TA_NAME}/rsrc:module_nvme_core"
+              value="/agent:${TE_IUT9_TA_NAME}/module:nvme_core"/>
+    <instance oid="/agent:${TE_IUT9_TA_NAME}/rsrc:module_nvme"
+              value="/agent:${TE_IUT9_TA_NAME}/module:nvme"/>
+    <instance oid="/agent:${TE_IUT9_TA_NAME}/rsrc:module_nvme_fabrics"
+              value="/agent:${TE_IUT9_TA_NAME}/module:nvme_fabrics"/>
+    <instance oid="/agent:${TE_IUT9_TA_NAME}/rsrc:module_nvme_tcp"
+              value="/agent:${TE_IUT9_TA_NAME}/module:nvme_tcp"/>
+
+    <!-- Initiator tools -->
+    <instance oid="/local:${TE_IUT9_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_IUT9_TA_NAME}/tools:/nvme-core:" value="${SF_DEPLOY_DIR}/nvme-core"/>
+    <instance oid="/local:${TE_IUT9_TA_NAME}/tools:/nvme:" value="${SF_DEPLOY_DIR}/nvme"/>
+    <instance oid="/local:${TE_IUT9_TA_NAME}/tools:/nvme-fabrics:" value="${SF_DEPLOY_DIR}/nvme-fabrics"/>
+    <instance oid="/local:${TE_IUT9_TA_NAME}/tools:/nvme-tcp:" value="${SF_DEPLOY_DIR}/nvme-tcp"/>
+    <instance oid="/local:${TE_IUT9_TA_NAME}/tools:/fio:" value="${SF_FIO}"/>
+    <instance oid="/local:${TE_IUT9_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <add cond="${TE_TST9:-false}">
+    <instance oid="/local:${TE_TST9_TA_NAME}/tools:"/>
+    <!-- Target modules -->
+    <instance oid="/agent:${TE_TST9_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_TST9_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_TST9_TA_NAME}/rsrc:module_nvmet"
+              value="/agent:${TE_TST9_TA_NAME}/module:nvmet"/>
+    <instance oid="/agent:${TE_TST9_TA_NAME}/rsrc:module_nvmet_tcp"
+              value="/agent:${TE_TST9_TA_NAME}/module:nvmet_tcp"/>
+
+    <!-- Target tools -->
+    <instance oid="/local:${TE_TST9_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_TST9_TA_NAME}/tools:/nvmet:" value="${SF_DEPLOY_DIR}/nvmet"/>
+    <instance oid="/local:${TE_TST9_TA_NAME}/tools:/nvmet-tcp:" value="${SF_DEPLOY_DIR}/nvmet-tcp"/>
+    <instance oid="/local:${TE_TST9_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <!-- TEN -->
+  <add cond="${TE_IUT10:-false}">
+    <instance oid="/local:${TE_IUT10_TA_NAME}/tools:"/>
+    <!-- Initiator modules -->
+    <instance oid="/agent:${TE_IUT10_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_IUT10_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_IUT10_TA_NAME}/rsrc:module_nvme_core"
+              value="/agent:${TE_IUT10_TA_NAME}/module:nvme_core"/>
+    <instance oid="/agent:${TE_IUT10_TA_NAME}/rsrc:module_nvme"
+              value="/agent:${TE_IUT10_TA_NAME}/module:nvme"/>
+    <instance oid="/agent:${TE_IUT10_TA_NAME}/rsrc:module_nvme_fabrics"
+              value="/agent:${TE_IUT10_TA_NAME}/module:nvme_fabrics"/>
+    <instance oid="/agent:${TE_IUT10_TA_NAME}/rsrc:module_nvme_tcp"
+              value="/agent:${TE_IUT10_TA_NAME}/module:nvme_tcp"/>
+
+    <!-- Initiator tools -->
+    <instance oid="/local:${TE_IUT10_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_IUT10_TA_NAME}/tools:/nvme-core:" value="${SF_DEPLOY_DIR}/nvme-core"/>
+    <instance oid="/local:${TE_IUT10_TA_NAME}/tools:/nvme:" value="${SF_DEPLOY_DIR}/nvme"/>
+    <instance oid="/local:${TE_IUT10_TA_NAME}/tools:/nvme-fabrics:" value="${SF_DEPLOY_DIR}/nvme-fabrics"/>
+    <instance oid="/local:${TE_IUT10_TA_NAME}/tools:/nvme-tcp:" value="${SF_DEPLOY_DIR}/nvme-tcp"/>
+    <instance oid="/local:${TE_IUT10_TA_NAME}/tools:/fio:" value="${SF_FIO}"/>
+    <instance oid="/local:${TE_IUT10_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+  <add cond="${TE_TST10:-false}">
+    <instance oid="/local:${TE_TST10_TA_NAME}/tools:"/>
+    <!-- Target modules -->
+    <instance oid="/agent:${TE_TST10_TA_NAME}/rsrc:module_libcrc32c"
+              value="/agent:${TE_TST10_TA_NAME}/module:libcrc32c"/>
+    <instance oid="/agent:${TE_TST10_TA_NAME}/rsrc:module_nvmet"
+              value="/agent:${TE_TST10_TA_NAME}/module:nvmet"/>
+    <instance oid="/agent:${TE_TST10_TA_NAME}/rsrc:module_nvmet_tcp"
+              value="/agent:${TE_TST10_TA_NAME}/module:nvmte_tcp"/>
+
+    <!-- Target tools -->
+    <instance oid="/local:${TE_TST10_TA_NAME}/tools:/libcrc32c:" value=""/>
+    <instance oid="/local:${TE_TST10_TA_NAME}/tools:/nvmet:" value="${SF_DEPLOY_DIR}/nvmet"/>
+    <instance oid="/local:${TE_TST10_TA_NAME}/tools:/nvmet-tcp:" value="${SF_DEPLOY_DIR}/nvmet-tcp"/>
+    <instance oid="/local:${TE_TST10_TA_NAME}/tools:/nvme-cli:"
+              value="${SF_NVME_CLI}"/>
+  </add>
+
+</history>

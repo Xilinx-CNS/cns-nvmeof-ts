@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved.
+
+# Defaults for test behaviour switches
+export TE_TEST_BEHAVIOUR_LOG_STACK=1
+export TE_TEST_BEHAVIOUR_LOG_TEST_FAIL_STATE=1

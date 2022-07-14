@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<test name="conf" type="package">
+    <objective>Configuration testing</objective>
+    <iter result="PASSED">
+
+        <test name="list" type="script">
+            <objective>Check that list command works</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="repeat"/>
+                <arg name="ttype"/>
+            </iter>
+        </test>
+
+        <test name="nvmecmd" type="script">
+            <objective>Check that list command works</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="repeat"/>
+                <arg name="ttype"/>
+            </iter>
+        </test>
+
+        <test name="onecmd" type="script">
+            <objective>Check that list command works</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="repeat"/>
+                <arg name="ttype"/>
+                <arg name="specific_commands"/>
+            </iter>
+        </test>
+
+         <test name="connect" type="script">
+            <objective>Check that list command works</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="ttype"/>
+                <arg name="repeat"/>
+                <arg name="connect_type"/>
+                <arg name="use_tgt_addr"/>
+            </iter>
+        </test>
+    </iter>
+</test>

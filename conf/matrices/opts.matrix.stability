@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved.
+--tester-req=FIO_STABILITY_IF_DELAY_LOOP|FIO_STABILITY_IF_LOSS_LOOP|FIO_STABILITY_IF_CORRUPTION_LOOP
+--tester-req=!LONG
+--tester-req=!BROKEN
+--tester-req=!MULTI

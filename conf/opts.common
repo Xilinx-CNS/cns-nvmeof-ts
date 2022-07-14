@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: Apache-2.0
+# (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved.
+--conf-cs=cs.conf.nvme
+--conf-cs=cs.conf.local_nvme
+--script=script.agents
+--conf-cs=cs.conf.tools
+--script=env.tools
+--script=script.behaviour
+--script=script.trc-tags

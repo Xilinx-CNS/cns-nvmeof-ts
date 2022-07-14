@@ -1,0 +1,30 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/* (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. */
+/**
+
+@defgroup conf Configuration testing
+@ingroup spec
+@{
+
+@author Nikita Somenkov <Nikita.Somenkov@oktetlabs.ru>
+
+All tests in the package take similar parameters. See below.
+
+@param blocksize - Block size unit
+@param iodepth - Number of IO buffers to keep in flight
+@param ioengine - IO engine to use
+@param rwtype - Rand or sequential IO direction
+@param numjobs - Duplicate job many times
+@param rwmixread - Percentage of mixed workload that is reads
+@param runtime_sec - Stop workload when this amount of time has passed, sec.
+
+
+@par Tests:
+
+-# @ref conf-list
+-# @ref conf-connect
+-# @ref conf-nvmecmd
+
+@} conf
+*/
+

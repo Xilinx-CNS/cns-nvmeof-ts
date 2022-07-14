@@ -1,0 +1,394 @@
+<?xml version="1.0"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<package version="1.0">
+
+    <description>NVMeoF Test Suite</description>
+
+    <author mailto="Konstantin.Ushakov@oktetlabs.ru"/>
+    <session track_conf="silent">
+
+        <vars>
+        <!--- @defgroup vars Common variables/datatypes -->
+        <!--- @ingroup nvme_ts -->
+        <!--- @{ -->
+        <!--- The page defines common variables and enums referenced by other
+             tests -->
+
+        <!--- @section vars-env Environments-->
+        <!--- Environment is a way to specify list of initiators/targets and
+             addresses assignment. In future we'll also specify devices here.-->
+        <!--- -# env.init-to-tgt : back to back topology, IPv4 network -->
+        <var name="env.init-to-tgt" global="true">
+            <value>'net':IUT
+                    {
+                     'init'
+                     {
+                       { 'init_rpcs':IUT },
+                       addr:'init_addr':inet:unicast,
+                       if:'init_if'
+                     },
+                     'tgt'
+                     {
+                       { 'tgt_rpcs':IUT_PEER },
+                       addr:'tgt_addr':inet:unicast,
+                       if:'tgt_if'
+                     }
+                   }
+            </value>
+        </var>
+        <!--- -# env.init-to-tgt : back to back topology (with numbering), IPv4 network -->
+        <var name="env.init-to-1xtgt" global="true">
+            <value>'net0':IUT
+                    {
+                     'init0'
+                     {
+                       { 'init_rpcs0':IUT },
+                       addr:'init_addr0':inet:unicast,
+                       if:'init_if0'
+                     },
+                     'tgt0'
+                     {
+                       { 'tgt_rpcs0':IUT_PEER },
+                       addr:'tgt_addr0':inet:unicast,
+                       if:'tgt_if0'
+                     }
+                   }
+            </value>
+        </var>
+        <!--- -# env.switch.init-to-2xtgt : single initiator and 2 targets, IPv4
+             network -->
+        <var name="env.switch.init-to-2xtgt" global="true">
+            <value reqs="2xTARGET">'net0':IUT
+                    {
+                     'init0'
+                     {
+                       { 'init_rpcs0':IUT },
+                       addr:'init_addr0':inet:unicast,
+                       if:'init_if0'
+                     },
+                     'tgt0'
+                     {
+                       { 'tgt_rpcs0':IUT_PEER },
+                       addr:'tgt_addr0':inet:unicast,
+                       if:'tgt_if0'
+                     },
+                     'tgt1'
+                     {
+                       { 'tgt_rpcs1':IUT_PEER },
+                       addr:'tgt_addr1':inet:unicast,
+                       if:'tgt_if1'
+                     }
+                   }
+            </value>
+        </var>
+        <!--- -# env.switch.2xinit-to-tgt : 2 initiators and a single target, IPv4
+             network-->
+        <var name="env.switch.2xinit-to-tgt" global="true">
+            <value reqs="2xINIT,SWITCH">'net0':IUT
+                    {
+                     'init0'
+                     {
+                       { 'init_rpcs0':IUT },
+                       addr:'init_addr0':inet:unicast,
+                       if:'init_if0'
+                     },
+                     'init1'
+                     {
+                       { 'init_rpcs1':IUT },
+                       addr:'init_addr1':inet:unicast,
+                       if:'init_if1'
+                     },
+                     'tgt0'
+                     {
+                       { 'tgt_rpcs0':IUT_PEER },
+                       addr:'tgt_addr0':inet:unicast,
+                       if:'tgt_if0'
+                     }
+                   }
+            </value>
+        </var>
+        <!--- -# env.2xinit-to-2xtgt : two initiators and two targets connected
+             init0->tgt0, init1->tgt1, IPv4 network -->
+        <var name="env.2xinit-to-2xtgt" global="true">
+            <value reqs="2xINIT,2xTARGET">'net0':IUT
+                    {
+                     'init0'
+                     {
+                       { 'init_rpcs0':IUT },
+                       addr:'init_addr0':inet:unicast,
+                       if:'init_if0'
+                     },
+                     'tgt0'
+                     {
+                       { 'tgt_rpcs0':IUT_PEER },
+                       addr:'tgt_addr0':inet:unicast,
+                       if:'tgt_if0'
+                     }
+                   },
+                   'net1':IUT
+                   {
+                     'init1'
+                     {
+                       { 'init_rpcs1':IUT },
+                       addr:'init_addr1':inet:unicast,
+                       if:'init_if1'
+                     },
+                     'tgt0'
+                     {
+                       { 'tgt_rpcs0':IUT_PEER },
+                       addr:'tgt_addr0':inet:unicast,
+                       if:'tgt_if0'
+                     }
+                   }
+            </value>
+        </var>
+        <!--- -# env.switch.2xinit-to-2xxtgt : single initiator and 5 targets, IPv4
+             network-->
+        <var name="env.switch.2xinit-to-2xtgt" global="true">
+            <value reqs="2xINIT,2xTARGET,SWITCH">'net0':IUT
+                    {
+                     'init0'
+                     {
+                       { 'init_rpcs0':IUT },
+                       addr:'init_addr0':inet:unicast,
+                       if:'init_if0'
+                     },
+                     'tgt0'
+                     {
+                       { 'tgt_rpcs0':IUT_PEER },
+                       addr:'tgt_addr0':inet:unicast,
+                       if:'tgt_if0'
+                     },
+                     'init1'
+                     {
+                       { 'init_rpcs1':IUT },
+                       addr:'init_addr1':inet:unicast,
+                       if:'init_if1'
+                     },
+                     'tgt0'
+                     {
+                       { 'tgt_rpcs0':IUT_PEER },
+                       addr:'tgt_addr0':inet:unicast,
+                       if:'tgt_if0'
+                     }
+                   }
+            </value>
+        </var>
+        <!--- -# env.switch.init-to-5xtgt : initiator and 5 targets, IPv4 network
+             -->
+        <var name="env.switch.init-to-5xtgt" global="true">
+            <value reqs="5xTARGET,SWITCH">'net0':IUT
+                    {
+                     'init0'
+                     {
+                       { 'init_rpcs0':IUT },
+                       addr:'init_addr0':inet:unicast,
+                       if:'init_if0'
+                     },
+                     'tgt0'
+                     {
+                       { 'tgt_rpcs0':IUT_PEER },
+                       addr:'tgt_addr0':inet:unicast,
+                       if:'tgt_if0'
+                     },
+                     'tgt1'
+                     {
+                       { 'tgt_rpcs1':IUT_PEER },
+                       addr:'tgt_addr1':inet:unicast,
+                       if:'tgt_if1'
+                     },
+                     'tgt2'
+                     {
+                       { 'tgt_rpcs2':IUT_PEER },
+                       addr:'tgt_addr2':inet:unicast,
+                       if:'tgt_if2'
+                     },
+                     'tgt3'
+                     {
+                       { 'tgt_rpcs3':IUT_PEER },
+                       addr:'tgt_addr3':inet:unicast,
+                       if:'tgt_if3'
+                     },
+                     'tgt4'
+                     {
+                       { 'tgt_rpcs4':IUT_PEER },
+                       addr:'tgt_addr4':inet:unicast,
+                       if:'tgt_if4'
+                     }
+                   }
+            </value>
+        </var>
+        <var name="env.switch.5xinit-to-tgt" global="true">
+            <value reqs="5xTARGET,SWITCH">'net0':IUT
+                    {
+                     'init0'
+                     {
+                       { 'init_rpcs0':IUT },
+                       addr:'init_addr0':inet:unicast,
+                       if:'init_if0'
+                     },
+                     'init1'
+                     {
+                       { 'init_rpcs1':IUT },
+                       addr:'init_addr1':inet:unicast,
+                       if:'init_if1'
+                     },
+                     'init2'
+                     {
+                       { 'init_rpcs2':IUT },
+                       addr:'init_addr2':inet:unicast,
+                       if:'init_if2'
+                     },
+                     'init3'
+                     {
+                       { 'init_rpcs3':IUT },
+                       addr:'init_addr3':inet:unicast,
+                       if:'init_if3'
+                     },
+                     'init4'
+                     {
+                       { 'init_rpcs4':IUT },
+                       addr:'init_addr4':inet:unicast,
+                       if:'init_if4'
+                     },
+                     'tgt0'
+                     {
+                       { 'tgt_rpcs0':IUT_PEER },
+                       addr:'tgt_addr0':inet:unicast,
+                       if:'tgt_if0'
+                     }
+                   }
+            </value>
+        </var>
+        </vars>
+
+        <!--- @section vars-enums Enums -->
+        <!--- Enums have several purposes:
+            - you can do automatic type checking
+              by saying that test argument belongs to enum,
+            - enum value can have reqs that allow to filter in/out
+              tests that run with the corresponding argument value,
+            - you can ask to iterate over all enum values.
+        -->
+        <!--- @section vars-enums-fio-blocksize.512-32k FIO Block sizes -->
+        <enum name="fio.blocksize.512-32k">
+            <value reqs="BLOCK_512,SMALL_BLOCK">512</value>
+            <value reqs="BLOCK_4k">4096</value>
+            <value reqs="BLOCK_32k">32768</value>
+        </enum>
+        <!--- @section vars-enums-fio-ioengine FIO IO Engine -->
+        <enum name="fio.ioengine">
+            <value reqs="IO_SYNC">sync</value>
+            <value reqs="IO_LIBAIO">libaio</value>
+            <value reqs="IO_PSYNC">psync</value>
+            <value reqs="_IO_POSIXAIO">posixaio</value>
+        </enum>
+        <!--- @section vars-enums-fio.numjobs.1-1024 Number of jobs -->
+        <enum name="fio.numjobs.1-1024">
+            <value>1</value>
+            <value>2</value>
+            <value>3</value>
+            <value>4</value>
+            <value>8</value>
+            <value>16</value>
+            <value>32</value>
+            <value>nproc</value>
+            <value>2nproc</value>
+            <value reqs="NUMJOBS_GT_100">128</value>
+            <value reqs="NUMJOBS_GT_100">256</value>
+            <value reqs="NUMJOBS_GT_100">512</value>
+            <value reqs="NUMJOBS_GT_100">1024</value>
+        </enum>
+        <enum name="fio.numjobs.reduced.1-32">
+            <value>1</value>
+            <value>16</value>
+            <value>32</value>
+        </enum>
+        <enum name="fio.numjobs.1-32,n,2n">
+            <value>1</value>
+            <value>2</value>
+            <value>3</value>
+            <value>4</value>
+            <value>8</value>
+            <value>16</value>
+            <value>32</value>
+            <value>nproc</value>
+            <value>2nproc</value>
+        </enum>
+        <!--- @section vars-enums-fio-rwtype FIO RWTYPE -->
+        <enum name="fio.rwtype">
+            <value reqs="FIO_RW_SEQ">seq</value>
+            <value reqs="FIO_RW_RAND">rand</value>
+        </enum>
+        <!--- @section vars-enums-fio.numjobs.1-64 FIO IO depth -->
+        <enum name="fio.iodepth.1-64">
+            <value>1</value>
+            <value>2</value>
+            <value>4</value>
+            <value>32</value>
+            <value>64</value>
+        </enum>
+        <!--- @section vars-enums-fio.numjobs.0-100 FIO RW Mixture % -->
+        <enum name="fio.rwmixread.0-100">
+            <value>0</value>
+            <value>10</value>
+            <value>20</value>
+            <value>30</value>
+            <value>40</value>
+            <value>50</value>
+            <value>60</value>
+            <value>70</value>
+            <value>80</value>
+            <value>90</value>
+            <value>100</value>
+        </enum>
+        <enum name="fio.rwmixread.rw_only">
+            <value>0</value>
+            <value>100</value>
+        </enum>
+        <enum name="fio.rwmixread.mixed">
+            <value>10</value>
+            <value>30</value>
+            <value>50</value>
+            <value>70</value>
+            <value>90</value>
+        </enum>
+
+
+        <!--- @section vars-enums-tapi-mtu MTU of the interfaces-->
+        <enum name="tapi.mtu">
+            <value reqs="MTU_1500">1500</value>
+            <value reqs="MTU_9000">9000</value>
+        </enum>
+        <!--- @section vars-enums-tapi-tso TSO setting-->
+        <enum name="tapi.tso">
+            <value reqs="TSO_ON">on</value>
+            <value reqs="TSO_OFF">off</value>
+        </enum>
+        <!--- @section vars-enums-tapi-lro LRO setting-->
+        <enum name="tapi.lro">
+            <value reqs="LRO_ON">on</value>
+            <value reqs="LRO_FF">off</value>
+        </enum>
+
+        <!--- @} vars-->
+
+        <prologue>
+            <script name="prologue"/>
+        </prologue>
+        <run>
+            <package name="conf"/>
+        </run>
+        <run>
+            <package name="perf"/>
+        </run>
+        <run>
+            <package name="stability"/>
+        </run>
+        <run>
+            <package name="data"/>
+        </run>
+
+    </session>
+</package>

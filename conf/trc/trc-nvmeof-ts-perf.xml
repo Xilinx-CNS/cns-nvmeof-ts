@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<!-- (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved. -->
+<test name="perf" type="package">
+    <objective>All performance test</objective>
+    <iter result="PASSED">
+        <test name="fio_simple" type="script">
+            <objective>Collect performance over fio tool</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+            </iter>
+        </test>
+
+        <test name="fio_1req_latency" type="script">
+            <objective>Collect performance over fio tool</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="perf_type"/>
+            </iter>
+        </test>
+
+        <test name="fio_simple_qd" type="script">
+            <objective>Collect performance over fio tool</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="perf_type"/>
+            </iter>
+        </test>
+
+        <test name="fio_simple_base_throughput_reduced" type="script">
+            <objective>Collect performance over fio tool</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="perf_type"/>
+            </iter>
+        </test>
+
+        <test name="fio_simple_base_throughput" type="script">
+            <objective>Collect performance over fio tool</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="perf_type"/>
+            </iter>
+        </test>
+
+        <test name="fio_simple_threads" type="script">
+            <objective>Collect performance over fio tool</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="perf_type"/>
+            </iter>
+        </test>
+
+        <test name="fio_simple_threads_mixed_throughput" type="script">
+            <objective>Collect performance over fio tool</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="perf_type"/>
+            </iter>
+        </test>
+
+        <test name="fio_simple_bs_iterate" type="script">
+            <objective>Collect performance over fio tool</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="is_shuffle_blocksize"/>
+                <arg name="perf_type"/>
+            </iter>
+        </test>
+
+        <test name="fio_simple_bs_iterate_throughput" type="script">
+            <objective>Collect performance over fio tool</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+                <arg name="is_shuffle_blocksize"/>
+                <arg name="perf_type"/>
+            </iter>
+        </test>
+
+        <test name="fio_multi" type="script">
+            <objective>Collect performance over fio tool multi</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+            </iter>
+        </test>
+
+
+        <test name="fio_multi" type="script">
+            <objective>Collect performance over fio tool multi</objective>
+            <iter result="PASSED">
+                <arg name="env"/>
+                <arg name="blocksize"/>
+                <arg name="ioengine"/>
+                <arg name="numjobs"/>
+                <arg name="rwtype"/>
+                <arg name="iodepth"/>
+                <arg name="rwmixread"/>
+                <arg name="runtime_sec"/>
+                <arg name="mtu"/>
+                <arg name="tso"/>
+                <arg name="lro"/>
+            </iter>
+        </test>
+
+    </iter>
+</test>

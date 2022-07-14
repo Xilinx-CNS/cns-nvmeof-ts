@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+# (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved.
+--tester-req=!LONG
+--tester-req=!BROKEN
+--tester-req=!MULTI
+--tester-run=nvmeof-ts/perf/fio_1req_latency
+--tester-run=nvmeof-ts/perf/fio_simple_qd
+--tester-run=nvmeof-ts/perf/fio_simple_threads
+--tester-run=nvmeof-ts/perf/fio_simple_base_throughput
+--tester-run=nvmeof-ts/perf/fio_simple_threads_mixed_throughput
+--tester-run=nvmeof-ts/perf/fio_simple_bs_iterate_throughput
+
+
+

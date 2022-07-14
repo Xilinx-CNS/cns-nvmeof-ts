@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# (c) Copyright 2018 - 2022 Xilinx, Inc. All rights reserved.
+--tester-req=!LONG
+--tester-req=!BROKEN
+--tester-run=nvmeof-ts/perf/fio_multi%1
